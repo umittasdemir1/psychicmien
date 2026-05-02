@@ -1,0 +1,63 @@
+.page { padding-block: var(--space-16); }
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+.header p {
+  color: var(--color-text-secondary);
+  margin-top: var(--space-3);
+  font-size: 1.125rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: box-shadow var(--transition), transform var(--transition);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+.card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+}
+.fire { background: linear-gradient(135deg, #FEE8E7, #FFF0EF); }
+.earth { background: linear-gradient(135deg, #E8F4E8, #F0FAF0); }
+.air { background: linear-gradient(135deg, #E8F0FE, #EFF5FF); }
+.water { background: linear-gradient(135deg, #E8F4FD, #EFF8FE); }
+
+.symbol { font-size: 3rem; line-height: 1; }
+
+.cardBody { padding: var(--space-4) var(--space-6) var(--space-6); }
+.name { font-size: 1.25rem; font-weight: 600; font-family: var(--font-heading); }
+.dateRange { font-size: 0.8125rem; color: var(--color-text-secondary); margin-top: var(--space-1); }
+.elementBadge {
+  display: inline-block;
+  margin-top: var(--space-3);
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.badge_fire { background: #FEE8E7; color: #C0392B; }
+.badge_earth { background: #E8F4E8; color: #2D6A2D; }
+.badge_air { background: #E8F0FE; color: #1A56DB; }
+.badge_water { background: #E8F4FD; color: #1A5276; }
+
+@media (max-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }

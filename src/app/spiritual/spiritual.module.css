@@ -1,0 +1,167 @@
+.page { padding-block: var(--space-16); }
+
+.hero {
+  text-align: center;
+  padding: var(--space-16) 0 var(--space-12);
+}
+.heroIcon { font-size: 4rem; margin-bottom: var(--space-4); }
+.heroTitle {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: var(--space-4);
+}
+.heroSubtitle {
+  font-size: 1.125rem;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin-inline: auto;
+  line-height: 1.7;
+}
+
+.section { margin-bottom: var(--space-16); }
+.sectionTitle {
+  font-size: 1.75rem;
+  margin-bottom: var(--space-4);
+}
+.sectionLead {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 700px;
+  margin-bottom: var(--space-8);
+}
+
+/* Topics */
+.topics { margin-bottom: var(--space-16); }
+.topicsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+.topicCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.topicCard:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.topicIcon { font-size: 2rem; display: block; margin-bottom: var(--space-3); }
+.topicTitle { font-size: 1.125rem; margin-bottom: var(--space-2); }
+.topicDesc { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.6; }
+
+/* Crystals */
+.crystalGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+.crystalCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+}
+.crystalDot {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 3px solid rgba(0,0,0,0.08);
+}
+.crystalName { font-size: 1rem; font-weight: 600; }
+.crystalMeaning { font-size: 0.875rem; color: var(--color-text-secondary); }
+
+/* Meditation */
+.meditationSteps { display: flex; flex-direction: column; gap: var(--space-6); }
+.meditationStep {
+  display: flex; gap: var(--space-6); align-items: flex-start;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+.stepNumber {
+  font-size: 2rem; font-weight: 700;
+  color: var(--color-primary); opacity: 0.25;
+  flex-shrink: 0; line-height: 1;
+}
+.stepTitle { font-size: 1.0625rem; font-weight: 600; margin-bottom: var(--space-1); }
+.stepDesc { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.6; }
+
+/* Numerology */
+.numberGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+.numberCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  text-align: center;
+}
+.numberBig {
+  font-size: 2.5rem; font-weight: 700;
+  color: var(--color-primary); display: block;
+  margin-bottom: var(--space-2);
+}
+.numberTitle { font-size: 1rem; font-weight: 600; margin-bottom: var(--space-1); }
+.numberDesc { font-size: 0.875rem; color: var(--color-text-secondary); }
+
+/* Dream symbols */
+.dreamGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+.dreamCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  text-align: center;
+}
+.dreamSymbol { font-size: 2rem; display: block; margin-bottom: var(--space-2); }
+.dreamName { font-size: 0.9375rem; font-weight: 600; margin-bottom: var(--space-1); }
+.dreamMeaning { font-size: 0.8125rem; color: var(--color-text-secondary); }
+
+/* Zodiac */
+.zodiacSection { margin-bottom: var(--space-8); }
+.zodiacGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-3);
+}
+.zodiacItem {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow var(--transition);
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-1);
+}
+.zodiacItem:hover { box-shadow: var(--shadow-sm); }
+.zodiacSymbol { font-size: 1.5rem; }
+.zodiacName { font-size: 0.8125rem; color: var(--color-text-secondary); }
+
+@media (max-width: 900px) {
+  .topicsGrid { grid-template-columns: repeat(2, 1fr); }
+  .crystalGrid { grid-template-columns: repeat(2, 1fr); }
+  .numberGrid { grid-template-columns: repeat(3, 1fr); }
+  .dreamGrid { grid-template-columns: repeat(2, 1fr); }
+  .zodiacGrid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 600px) {
+  .topicsGrid { grid-template-columns: 1fr; }
+  .crystalGrid { grid-template-columns: repeat(2, 1fr); }
+  .numberGrid { grid-template-columns: repeat(3, 1fr); }
+  .zodiacGrid { grid-template-columns: repeat(3, 1fr); }
+}

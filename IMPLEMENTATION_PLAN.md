@@ -292,43 +292,43 @@ d:\PsychicMien/
 ## 8. Uygulama Fazları
 
 ### Faz 1: Temel (Gün 1-3)
-- [ ] Next.js 16 proje kurulumu + TypeScript strict
-- [ ] Supabase projesi oluşturma + DB şeması
-- [ ] Klasör yapısı (domain/data/presentation)
-- [ ] Design system (globals.css — tüm tokenlar)
-- [ ] Layout bileşenleri (Header, Footer, Navbar)
-- [ ] Domain entities & repository interfaces
-- [ ] Supabase client + repository implementasyonları
+- [x] Next.js 16 proje kurulumu + TypeScript strict
+- [x] Supabase projesi oluşturma + DB şeması
+- [x] Klasör yapısı (domain/data/presentation)
+- [x] Design system (globals.css — tüm tokenlar)
+- [x] Layout bileşenleri (Header, Footer, Navbar)
+- [x] Domain entities & repository interfaces
+- [x] Supabase client + repository implementasyonları
 
 ### Faz 2: Ana Sayfalar (Gün 4-6)
-- [ ] Anasayfa (Hero, zodiac picker, shop highlight, blog preview)
-- [ ] Mağaza sayfası (Etsy ürün kartları + dış link)
-- [ ] Burçlar sayfası + tekil burç sayfaları
-- [ ] Tarot rehberi + tekil kart sayfaları
+- [x] Anasayfa (Hero, zodiac picker, shop highlight, blog preview)
+- [x] Mağaza sayfası (Etsy ürün kartları + dış link)
+- [x] Burçlar sayfası + tekil burç sayfaları
+- [x] Tarot rehberi + tekil kart sayfaları
 
 ### Faz 3: İçerik & Blog (Gün 7-8)
-- [ ] Blog sistemi (Supabase'den çekilen)
-- [ ] Blog listesi + tekil yazı sayfaları
-- [ ] Spiritüel bilgiler hub sayfası
+- [x] Blog sistemi (Supabase'den çekilen)
+- [x] Blog listesi + tekil yazı sayfaları
+- [x] Spiritüel bilgiler hub sayfası
 
 ### Faz 4: Admin Panel + Monetizasyon (Gün 9-11)
-- [ ] Admin auth (Supabase Auth + RLS koruması)
-- [ ] Admin dashboard (özet istatistikler)
-- [ ] Ürün CRUD (Etsy linkleri yönetimi)
-- [ ] Blog yazısı CRUD (oluştur, düzenle, yayınla)
-- [ ] Burç yorumu CRUD (günlük/haftalık/aylık)
-- [ ] Tarot kartı CRUD
+- [ ] Admin auth (Supabase Auth + RLS koruması) — kod/RLS hazır, ilk admin kullanıcısı oluşturulacak
+- [x] Admin dashboard (özet istatistikler)
+- [x] Ürün CRUD (Etsy linkleri yönetimi)
+- [x] Blog yazısı CRUD (oluştur, düzenle, yayınla)
+- [x] Burç yorumu CRUD (günlük/haftalık/aylık)
+- [x] Tarot kartı CRUD
 - [ ] Google AdSense entegrasyonu (next/script)
 - [ ] AdUnit bileşeni (banner, sidebar, in-content)
-- [ ] ads.txt dosyası
+- [x] ads.txt dosyası
 - [ ] Affiliate link altyapısı (Amazon vb. — Etsy hariç)
 - [ ] JSON-LD structured data (Product, Article, FAQ)
 
 ### Faz 5: Polish & Deploy (Gün 12-14)
-- [ ] SEO optimizasyonu (meta, OG, sitemap.ts, robots.txt)
+- [x] SEO optimizasyonu (meta, OG, sitemap.ts, robots.txt)
 - [ ] Responsive tasarım polishing
 - [ ] Micro-animasyonlar & hover efektleri
-- [ ] Hukuki sayfalar (Gizlilik, Şartlar, Çerez politikası)
+- [ ] Hukuki sayfalar (Gizlilik, Şartlar, Çerez politikası) — Gizlilik/Şartlar hazır, çerez politikası eksik
 - [ ] Netlify deployment
 - [ ] Core Web Vitals optimizasyonu
 

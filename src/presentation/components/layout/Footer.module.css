@@ -1,0 +1,99 @@
+.footer {
+  background-color: var(--color-text);
+  color: rgba(255, 255, 255, 0.75);
+  padding-block: var(--space-16);
+  margin-top: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-12);
+  margin-bottom: var(--space-12);
+}
+
+.brand .logo {
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.brand .logo span {
+  color: var(--color-accent);
+}
+
+.brand p {
+  margin-top: var(--space-3);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.colTitle {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fff;
+  margin-bottom: var(--space-4);
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.links a {
+  font-size: 0.875rem;
+  transition: color var(--transition);
+}
+
+.links a:hover {
+  color: var(--color-accent-light);
+}
+
+.bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+}
+
+.legalLinks {
+  display: flex;
+  gap: var(--space-6);
+}
+
+.legalLinks a {
+  transition: color var(--transition);
+}
+
+.legalLinks a:hover {
+  color: var(--color-accent-light);
+}
+
+.affiliate {
+  margin-top: var(--space-4);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+  .brand {
+    grid-column: 1 / -1;
+  }
+  .bottom {
+    flex-direction: column;
+    gap: var(--space-4);
+    text-align: center;
+  }
+}

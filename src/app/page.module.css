@@ -1,0 +1,139 @@
+/* ─── Hero ───────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, #F3EFF9 0%, #FAFAF8 60%, #FDF6ED 100%);
+  padding-block: var(--space-24);
+  text-align: center;
+}
+
+.heroEyebrow {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-4);
+}
+
+.heroTitle {
+  max-width: 700px;
+  margin-inline: auto;
+  margin-bottom: var(--space-6);
+}
+
+.heroTitle span {
+  color: var(--color-primary);
+}
+
+.heroSubtitle {
+  max-width: 520px;
+  margin-inline: auto;
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+  margin-bottom: var(--space-8);
+}
+
+.heroCta {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ─── Zodiac Picker ──────────────────────────────── */
+.zodiacSection {
+  padding-block: var(--space-16);
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.sectionHeader p {
+  color: var(--color-text-secondary);
+  margin-top: var(--space-3);
+}
+
+.zodiacGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-3);
+}
+
+.zodiacCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-3);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+
+.zodiacCard:hover {
+  border-color: var(--color-primary-light);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.zodiacSymbol {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.zodiacName {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.zodiacDate {
+  font-size: 0.6875rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+/* ─── Featured Products ──────────────────────────── */
+.shopSection {
+  padding-block: var(--space-16);
+  background-color: var(--color-surface);
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+/* ─── Blog Preview ───────────────────────────────── */
+.blogSection {
+  padding-block: var(--space-16);
+}
+
+.blogGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.sectionFooter {
+  text-align: center;
+}
+
+/* ─── Responsive ─────────────────────────────────── */
+@media (max-width: 1024px) {
+  .zodiacGrid { grid-template-columns: repeat(4, 1fr); }
+  .productGrid, .blogGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .zodiacGrid { grid-template-columns: repeat(3, 1fr); }
+  .productGrid, .blogGrid { grid-template-columns: 1fr; }
+  .hero { padding-block: var(--space-16); }
+}
