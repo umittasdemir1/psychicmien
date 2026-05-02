@@ -11,7 +11,11 @@
   border-radius: 50%;
   margin-bottom: var(--space-4);
 }
-.symbol { font-size: 2.5rem; }
+.icon {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
 .dateRange { color: var(--color-text-secondary); margin-top: var(--space-2); }
 
 .periods {

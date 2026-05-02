@@ -39,7 +39,11 @@
 .air { background: linear-gradient(135deg, #E8F0FE, #EFF5FF); }
 .water { background: linear-gradient(135deg, #E8F4FD, #EFF8FE); }
 
-.symbol { font-size: 3rem; line-height: 1; }
+.icon {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
 
 .cardBody { padding: var(--space-4) var(--space-6) var(--space-6); }
 .name { font-size: 1.25rem; font-weight: 600; font-family: var(--font-heading); }

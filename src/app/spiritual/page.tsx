@@ -182,7 +182,7 @@ export default function SpirituelPage() {
           <div className={styles.zodiacGrid}>
             {ZODIAC_SIGNS.map((sign) => (
               <Link key={sign.slug} href={`/horoscopes/${sign.slug}`} className={styles.zodiacItem}>
-                <span className={styles.zodiacSymbol}>{sign.symbol}</span>
+                <img className={styles.zodiacIcon} src={sign.icon} alt="" aria-hidden="true" />
                 <span className={styles.zodiacName}>{sign.name}</span>
               </Link>
             ))}

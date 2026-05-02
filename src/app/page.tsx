@@ -24,23 +24,6 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className={styles.hero}>
-        <div className="container">
-          <span className={styles.heroEyebrow}>Spiritüel Rehberlik</span>
-          <h1 className={styles.heroTitle}>
-            Evrenin Sesini <span>Dinle</span>
-          </h1>
-          <p className={styles.heroSubtitle}>
-            Tarot okumları, burç yorumları ve spiritüel rehberlikle kendi yolunu keşfet.
-          </p>
-          <div className={styles.heroCta}>
-            <LinkButton href="/horoscopes" variant="primary" size="lg">Burcunu Keşfet</LinkButton>
-            <LinkButton href="/tarot" variant="secondary" size="lg">Tarot Rehberi</LinkButton>
-          </div>
-        </div>
-      </section>
-
       {/* Zodiac Picker */}
       <section className={styles.zodiacSection}>
         <div className="container">
@@ -51,7 +34,7 @@ export default async function HomePage() {
           <div className={styles.zodiacGrid}>
             {ZODIAC_SIGNS.map((sign) => (
               <Link key={sign.slug} href={`/horoscopes/${sign.slug}`} className={styles.zodiacCard}>
-                <span className={styles.zodiacSymbol} aria-hidden="true">{sign.symbol}</span>
+                <img className={styles.zodiacIcon} src={sign.icon} alt="" aria-hidden="true" />
                 <span className={styles.zodiacName}>{sign.name}</span>
                 <span className={styles.zodiacDate}>{sign.dateRange}</span>
               </Link>

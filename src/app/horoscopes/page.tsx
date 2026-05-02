@@ -35,7 +35,7 @@ export default function HoroscopesPage() {
             return (
               <Link key={sign.slug} href={`/horoscopes/${sign.slug}`} className={styles.card}>
                 <div className={`${styles.cardTop} ${styles[element]}`}>
-                  <span className={styles.symbol}>{sign.symbol}</span>
+                  <img className={styles.icon} src={sign.icon} alt="" aria-hidden="true" />
                 </div>
                 <div className={styles.cardBody}>
                   <h2 className={styles.name}>{sign.name}</h2>

@@ -48,7 +48,7 @@ export default async function SignPage({ params }: Props) {
       <div className="container">
         <header className={styles.header}>
           <div className={styles.symbolWrap}>
-            <span className={styles.symbol}>{signData.symbol}</span>
+            <img className={styles.icon} src={signData.icon} alt="" aria-hidden="true" />
           </div>
           <h1>{signData.name} Burcu</h1>
           <p className={styles.dateRange}>{signData.dateRange}</p>
