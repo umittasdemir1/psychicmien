@@ -2,47 +2,72 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu } from 'lucide-react';
-import { NAV_LINKS } from '@/lib/constants';
+import { locales, localeNames } from '@/i18n/config';
+import type { Locale } from '@/i18n/config';
 import styles from './Header.module.css';
 
-export function Header() {
+interface NavDict {
+  horoscopes: string;
+  tarot: string;
+  blog: string;
+  spiritual: string;
+  shop: string;
+}
+
+interface Props {
+  dict: { nav: NavDict };
+  lang: Locale;
+}
+
+export function Header({ dict, lang }: Props) {
   const pathname = usePathname();
+
+  // Replace current locale prefix with another for switcher links
+  function localePath(targetLang: string) {
+    const withoutLocale = pathname.replace(/^\/(tr|en|es)/, '') || '/';
+    return `/${targetLang}${withoutLocale}`;
+  }
+
+  const navLinks = [
+    { href: `/${lang}/horoscopes`, label: dict.nav.horoscopes },
+    { href: `/${lang}/tarot`, label: dict.nav.tarot },
+    { href: `/${lang}/blog`, label: dict.nav.blog },
+    { href: `/${lang}/spiritual`, label: dict.nav.spiritual },
+    { href: `/${lang}/shop`, label: dict.nav.shop },
+  ];
 
   return (
     <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
-        <Link href="/" className={styles.logo}>
+        <Link href={`/${lang}`} className={styles.logo}>
           Psychic<span>Mien</span>
         </Link>
 
         <nav className={styles.nav} aria-label="Ana navigasyon">
-          {NAV_LINKS.map((link) =>
-            link.href === '/shop' ? (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`${styles.navLink} ${styles.shopLink}`}
-                aria-current={pathname === link.href ? 'page' : undefined}
-              >
-                {link.label}
-              </Link>
-            ) : (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={styles.navLink}
-                aria-current={pathname === link.href ? 'page' : undefined}
-              >
-                {link.label}
-              </Link>
-            )
-          )}
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={styles.navLink}
+              aria-current={pathname === link.href ? 'page' : undefined}
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-        <button className={styles.menuBtn} aria-label="Menüyü aç">
-          <Menu size={24} />
-        </button>
+        <div className={styles.langSwitcher}>
+          {locales.map((loc) => (
+            <Link
+              key={loc}
+              href={localePath(loc)}
+              className={`${styles.langBtn} ${loc === lang ? styles.langBtnActive : ''}`}
+              title={localeNames[loc]}
+            >
+              {loc.toUpperCase()}
+            </Link>
+          ))}
+        </div>
       </div>
     </header>
   );

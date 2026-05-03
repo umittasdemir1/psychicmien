@@ -1,31 +1,34 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
+import { headers } from 'next/headers';
 import './globals.css';
-import { Header } from '@/presentation/components/layout/Header';
-import { Footer } from '@/presentation/components/layout/Footer';
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: {
-    default: SITE_NAME,
-    template: `%s | ${SITE_NAME}`,
-  },
+  title: { default: SITE_NAME, template: `%s | ${SITE_NAME}` },
   description: SITE_DESCRIPTION,
   metadataBase: new URL(SITE_URL),
-  openGraph: {
-    siteName: SITE_NAME,
-    type: 'website',
-    locale: 'tr_TR',
-  },
+  openGraph: { siteName: SITE_NAME, type: 'website' },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const headersList = await headers();
+  const locale = headersList.get('x-locale') ?? 'tr';
+  const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+
   return (
-    <html lang="tr" data-scroll-behavior="smooth">
-      <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-      </body>
+    <html lang={locale} data-scroll-behavior="smooth">
+      <head>
+        {adsenseClient && (
+          <Script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        )}
+      </head>
+      <body>{children}</body>
     </html>
   );
 }

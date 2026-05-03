@@ -1,58 +1,30 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { buildMetadata } from '@/lib/seo';
 import { ZODIAC_SIGNS } from '@/lib/constants';
+import { locales } from '@/i18n/config';
+import type { Locale } from '@/i18n/config';
+import { getDictionary } from '@/i18n/getDictionary';
 import styles from './spiritual.module.css';
 
-export const metadata: Metadata = buildMetadata({
-  title: 'Spiritüel Rehber',
-  description: 'Tarot, numeroloji, kristaller, meditasyon ve spiritüel gelişim için kapsamlı rehberiniz.',
-});
+interface Props {
+  params: Promise<{ lang: string }>;
+}
 
-const TOPICS = [
-  {
-    slug: 'tarot',
-    icon: '🃏',
-    title: 'Tarot',
-    description: 'Major ve Minor Arcana kartlarının anlamları, yayılımlar ve okuma teknikleri.',
-    href: '/tarot',
-  },
-  {
-    slug: 'astroloji',
-    icon: '⭐',
-    title: 'Astroloji',
-    description: 'Burç yorumları, gezegen transitleri, doğum haritası temelleri.',
-    href: '/horoscopes',
-  },
-  {
-    slug: 'kristaller',
-    icon: '💎',
-    title: 'Kristaller',
-    description: 'Şifa kristalleri, enerji çalışması ve koleksiyon rehberi.',
-    href: '#kristaller',
-  },
-  {
-    slug: 'meditasyon',
-    icon: '🧘',
-    title: 'Meditasyon',
-    description: 'Bilinçli farkındalık, görselleştirme ve spiritüel bağlantı teknikleri.',
-    href: '#meditasyon',
-  },
-  {
-    slug: 'numeroloji',
-    icon: '🔢',
-    title: 'Numeroloji',
-    description: 'Yaşam yolu sayısı, kader sayısı ve sayıların spiritüel anlamları.',
-    href: '#numeroloji',
-  },
-  {
-    slug: 'dreamwork',
-    icon: '🌙',
-    title: 'Rüya Yorumu',
-    description: 'Rüyaların sembolik dili ve bilinçaltı mesajlarını okuma.',
-    href: '#ruyalar',
-  },
-];
+export async function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = await params;
+  if (!(locales as readonly string[]).includes(lang)) return {};
+  const dict = await getDictionary(lang as Locale);
+  return buildMetadata({
+    title: dict.spiritual.title,
+    description: dict.spiritual.subtitle,
+  });
+}
 
 const CRYSTALS = [
   { name: 'Ametist', color: '#9B59B6', meaning: 'Sezgi, sakinlik, spiritüel farkındalık' },
@@ -63,37 +35,81 @@ const CRYSTALS = [
   { name: 'Sitrin', color: '#F4D03F', meaning: 'Bereket, pozitif enerji, yaratıcılık' },
 ];
 
-export default function SpirituelPage() {
+export default async function SpiritualPage({ params }: Props) {
+  const { lang } = await params;
+  if (!(locales as readonly string[]).includes(lang)) notFound();
+  const dict = await getDictionary(lang as Locale);
+
+  const TOPICS = [
+    {
+      slug: 'tarot',
+      icon: '🃏',
+      title: dict.nav.tarot,
+      description: dict.tarot.subtitle,
+      href: `/${lang}/tarot`,
+    },
+    {
+      slug: 'astrology',
+      icon: '⭐',
+      title: dict.nav.horoscopes,
+      description: dict.horoscopes.subtitle,
+      href: `/${lang}/horoscopes`,
+    },
+    {
+      slug: 'crystals',
+      icon: '💎',
+      title: dict.spiritual.crystals,
+      description: dict.spiritual.crystals_lead,
+      href: '#crystals',
+    },
+    {
+      slug: 'meditation',
+      icon: '🧘',
+      title: dict.spiritual.meditation,
+      description: '',
+      href: '#meditation',
+    },
+    {
+      slug: 'numerology',
+      icon: '🔢',
+      title: dict.spiritual.numerology,
+      description: dict.spiritual.numerology_lead,
+      href: '#numerology',
+    },
+    {
+      slug: 'dreams',
+      icon: '🌙',
+      title: dict.spiritual.dreams,
+      description: '',
+      href: '#dreams',
+    },
+  ];
+
   return (
     <div className={styles.page}>
       <div className="container">
         <header className={styles.hero}>
           <div className={styles.heroIcon}>🔮</div>
-          <h1 className={styles.heroTitle}>Spiritüel Rehber</h1>
-          <p className={styles.heroSubtitle}>
-            Kendinizi ve evreni daha derin anlamak için spiritüel araçlar, bilgelik ve rehberlik.
-          </p>
+          <h1 className={styles.heroTitle}>{dict.spiritual.title}</h1>
+          <p className={styles.heroSubtitle}>{dict.spiritual.subtitle}</p>
         </header>
 
         <section className={styles.topics}>
-          <h2 className={styles.sectionTitle}>Konular</h2>
+          <h2 className={styles.sectionTitle}>{dict.spiritual.topics}</h2>
           <div className={styles.topicsGrid}>
             {TOPICS.map((topic) => (
               <Link key={topic.slug} href={topic.href} className={styles.topicCard}>
                 <span className={styles.topicIcon}>{topic.icon}</span>
                 <h3 className={styles.topicTitle}>{topic.title}</h3>
-                <p className={styles.topicDesc}>{topic.description}</p>
+                {topic.description && <p className={styles.topicDesc}>{topic.description}</p>}
               </Link>
             ))}
           </div>
         </section>
 
-        <section id="kristaller" className={styles.section}>
-          <h2 className={styles.sectionTitle}>Şifa Kristalleri</h2>
-          <p className={styles.sectionLead}>
-            Kristaller, enerji çalışması ve spiritüel pratiğin vazgeçilmez araçlarıdır.
-            Her kristal benzersiz titreşimler taşır.
-          </p>
+        <section id="crystals" className={styles.section}>
+          <h2 className={styles.sectionTitle}>{dict.spiritual.crystals}</h2>
+          <p className={styles.sectionLead}>{dict.spiritual.crystals_lead}</p>
           <div className={styles.crystalGrid}>
             {CRYSTALS.map((crystal) => (
               <div key={crystal.name} className={styles.crystalCard}>
@@ -108,8 +124,8 @@ export default function SpirituelPage() {
           </div>
         </section>
 
-        <section id="meditasyon" className={styles.section}>
-          <h2 className={styles.sectionTitle}>Meditasyon Rehberi</h2>
+        <section id="meditation" className={styles.section}>
+          <h2 className={styles.sectionTitle}>{dict.spiritual.meditation}</h2>
           <div className={styles.meditationSteps}>
             {[
               { step: '01', title: 'Hazırlık', desc: 'Sakin bir ortam seçin, rahat bir pozisyon alın. Telefon bildirimlerini kapatın.' },
@@ -128,12 +144,9 @@ export default function SpirituelPage() {
           </div>
         </section>
 
-        <section id="numeroloji" className={styles.section}>
-          <h2 className={styles.sectionTitle}>Numeroloji: Yaşam Yolu Sayısı</h2>
-          <p className={styles.sectionLead}>
-            Doğum tarihinizin rakamlarını toplayarak yaşam yolu sayınızı bulun.
-            Örneğin: 15/03/1990 → 1+5+0+3+1+9+9+0 = 28 → 2+8 = <strong>10 → 1+0 = 1</strong>
-          </p>
+        <section id="numerology" className={styles.section}>
+          <h2 className={styles.sectionTitle}>{dict.spiritual.numerology}</h2>
+          <p className={styles.sectionLead}>{dict.spiritual.numerology_lead}</p>
           <div className={styles.numberGrid}>
             {[
               { n: '1', title: 'Lider', desc: 'Bağımsızlık, yaratıcılık, öncülük.' },
@@ -155,8 +168,8 @@ export default function SpirituelPage() {
           </div>
         </section>
 
-        <section id="ruyalar" className={styles.section}>
-          <h2 className={styles.sectionTitle}>Yaygın Rüya Sembolleri</h2>
+        <section id="dreams" className={styles.section}>
+          <h2 className={styles.sectionTitle}>{dict.spiritual.dreams}</h2>
           <div className={styles.dreamGrid}>
             {[
               { symbol: '🌊', name: 'Su', meaning: 'Duygular, bilinçaltı, dönüşüm' },
@@ -178,12 +191,12 @@ export default function SpirituelPage() {
         </section>
 
         <section className={styles.zodiacSection}>
-          <h2 className={styles.sectionTitle}>Burç Rehberi</h2>
+          <h2 className={styles.sectionTitle}>{dict.spiritual.zodiac_guide}</h2>
           <div className={styles.zodiacGrid}>
             {ZODIAC_SIGNS.map((sign) => (
-              <Link key={sign.slug} href={`/horoscopes/${sign.slug}`} className={styles.zodiacItem}>
+              <Link key={sign.slug} href={`/${lang}/horoscopes/${sign.slug}`} className={styles.zodiacItem}>
                 <img className={styles.zodiacIcon} src={sign.icon} alt="" aria-hidden="true" />
-                <span className={styles.zodiacName}>{sign.name}</span>
+                <span className={styles.zodiacName}>{dict.zodiac[sign.slug as keyof typeof dict.zodiac]}</span>
               </Link>
             ))}
           </div>

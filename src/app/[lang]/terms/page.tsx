@@ -1,19 +1,36 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { buildMetadata } from '@/lib/seo';
+import { locales } from '@/i18n/config';
+import type { Locale } from '@/i18n/config';
+import { getDictionary } from '@/i18n/getDictionary';
 import styles from '../privacy/privacy.module.css';
 
-export const metadata: Metadata = buildMetadata({
-  title: 'Kullanım Koşulları',
-  description: 'PsychicMien kullanım koşulları.',
-  noIndex: true,
-});
+interface Props {
+  params: Promise<{ lang: string }>;
+}
 
-export default function TermsPage() {
+export async function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = await params;
+  if (!(locales as readonly string[]).includes(lang)) return {};
+  const dict = await getDictionary(lang as Locale);
+  return buildMetadata({ title: dict.terms.title, noIndex: true });
+}
+
+export default async function TermsPage({ params }: Props) {
+  const { lang } = await params;
+  if (!(locales as readonly string[]).includes(lang)) notFound();
+  const dict = await getDictionary(lang as Locale);
+
   return (
     <div className={styles.page}>
       <div className="container">
         <div className={styles.content}>
-          <h1 className={styles.title}>Kullanım Koşulları</h1>
+          <h1 className={styles.title}>{dict.terms.title}</h1>
           <p className={styles.updated}>Son güncelleme: Mayıs 2026</p>
 
           <section className={styles.section}>
@@ -33,7 +50,6 @@ export default function TermsPage() {
             </p>
             <p>
               Bu içeriklere dayanarak alınan kararlarda PsychicMien hiçbir sorumluluk kabul etmez.
-              Önemli kararlarınız için uzman profesyonellere danışmanızı tavsiye ederiz.
             </p>
           </section>
 
@@ -46,15 +62,7 @@ export default function TermsPage() {
           </section>
 
           <section className={styles.section}>
-            <h2>4. Dış Bağlantılar</h2>
-            <p>
-              Sitemizde üçüncü taraf web sitelerine (Etsy, Amazon vb.) bağlantılar bulunmaktadır. Bu sitelerin
-              içerik ve gizlilik politikalarından sorumlu değiliz.
-            </p>
-          </section>
-
-          <section className={styles.section}>
-            <h2>5. Değişiklikler</h2>
+            <h2>4. Değişiklikler</h2>
             <p>
               Bu kullanım koşullarını önceden bildirimde bulunmaksızın değiştirme hakkımızı saklı tutarız.
               Siteyi kullanmaya devam etmeniz güncel koşulları kabul ettiğiniz anlamına gelir.

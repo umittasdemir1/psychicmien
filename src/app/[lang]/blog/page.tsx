@@ -1,20 +1,41 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { createServerSupabaseClient } from '@/data/supabase/server';
 import { BlogRepository } from '@/data/repositories/BlogRepository';
 import { GetBlogPosts } from '@/domain/usecases/GetBlogPosts';
 import { buildMetadata } from '@/lib/seo';
 import { formatDate, truncate } from '@/lib/utils';
+import { locales } from '@/i18n/config';
+import type { Locale } from '@/i18n/config';
+import { getDictionary } from '@/i18n/getDictionary';
 import styles from './blog.module.css';
 
-export const metadata: Metadata = buildMetadata({
-  title: 'Blog',
-  description: 'Tarot rehberleri, burç yorumları, spiritüel bilgelik ve mistik konularda yazılar.',
-});
+interface Props {
+  params: Promise<{ lang: string }>;
+}
 
 export const revalidate = 3600;
 
-export default async function BlogPage() {
+export async function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = await params;
+  if (!(locales as readonly string[]).includes(lang)) return {};
+  const dict = await getDictionary(lang as Locale);
+  return buildMetadata({
+    title: dict.blog.title,
+    description: dict.blog.subtitle,
+  });
+}
+
+export default async function BlogPage({ params }: Props) {
+  const { lang } = await params;
+  if (!(locales as readonly string[]).includes(lang)) notFound();
+  const dict = await getDictionary(lang as Locale);
+
   const supabase = await createServerSupabaseClient();
   const posts = await new GetBlogPosts(new BlogRepository(supabase)).execute(true).catch(() => []);
 
@@ -25,8 +46,8 @@ export default async function BlogPage() {
     <div className={styles.page}>
       <div className="container">
         <header className={styles.header}>
-          <h1>Blog</h1>
-          <p>Spiritüel bilgelik, tarot rehberleri ve daha fazlası</p>
+          <h1>{dict.blog.title}</h1>
+          <p>{dict.blog.subtitle}</p>
         </header>
 
         {categories.length > 0 && (
@@ -38,11 +59,11 @@ export default async function BlogPage() {
         )}
 
         {posts.length === 0 ? (
-          <p className={styles.empty}>Yazılar yakında eklenecek.</p>
+          <p className={styles.empty}>{dict.blog.no_posts}</p>
         ) : (
           <>
             {featured && (
-              <Link href={`/blog/${featured.slug}`} className={styles.featured}>
+              <Link href={`/${lang}/blog/${featured.slug}`} className={styles.featured}>
                 {featured.coverImage && (
                   <div className={styles.featuredImage}>
                     <img src={featured.coverImage} alt={featured.title} />
@@ -61,7 +82,7 @@ export default async function BlogPage() {
 
             <div className={styles.grid}>
               {rest.map((post) => (
-                <Link key={post.id} href={`/blog/${post.slug}`} className={styles.card}>
+                <Link key={post.id} href={`/${lang}/blog/${post.slug}`} className={styles.card}>
                   {post.coverImage && (
                     <div className={styles.cardImage}>
                       <img src={post.coverImage} alt={post.title} />

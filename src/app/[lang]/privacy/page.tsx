@@ -1,19 +1,36 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { buildMetadata } from '@/lib/seo';
+import { locales } from '@/i18n/config';
+import type { Locale } from '@/i18n/config';
+import { getDictionary } from '@/i18n/getDictionary';
 import styles from './privacy.module.css';
 
-export const metadata: Metadata = buildMetadata({
-  title: 'Gizlilik Politikası',
-  description: 'PsychicMien gizlilik politikası — kişisel verilerinizin nasıl işlendiği hakkında bilgi.',
-  noIndex: true,
-});
+interface Props {
+  params: Promise<{ lang: string }>;
+}
 
-export default function PrivacyPage() {
+export async function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = await params;
+  if (!(locales as readonly string[]).includes(lang)) return {};
+  const dict = await getDictionary(lang as Locale);
+  return buildMetadata({ title: dict.privacy.title, noIndex: true });
+}
+
+export default async function PrivacyPage({ params }: Props) {
+  const { lang } = await params;
+  if (!(locales as readonly string[]).includes(lang)) notFound();
+  const dict = await getDictionary(lang as Locale);
+
   return (
     <div className={styles.page}>
       <div className="container">
         <div className={styles.content}>
-          <h1 className={styles.title}>Gizlilik Politikası</h1>
+          <h1 className={styles.title}>{dict.privacy.title}</h1>
           <p className={styles.updated}>Son güncelleme: Mayıs 2026</p>
 
           <section className={styles.section}>
@@ -45,31 +62,19 @@ export default function PrivacyPage() {
             <ul>
               <li><strong>Google AdSense:</strong> Kişiselleştirilmiş reklam gösterimi için çerez kullanır.</li>
               <li><strong>Etsy:</strong> Mağaza bağlantıları, Etsy&apos;nin gizlilik politikasına tabidir.</li>
-              <li><strong>Amazon Affiliate:</strong> Ürün bağlantıları Amazon Associates programı çerçevesinde işlenir.</li>
             </ul>
-            <p>
-              Bu hizmetlerin gizlilik politikaları kendi siteleri üzerinden incelenebilir.
-            </p>
           </section>
 
           <section className={styles.section}>
             <h2>4. Affiliate Bağlantılar</h2>
             <p>
               Sitemizdeki bazı bağlantılar affiliate (ortak) bağlantılardır. Bu bağlantılar üzerinden yapılan
-              alışverişlerden komisyon kazanabiliriz. Bu durum ürün veya hizmet hakkındaki görüşlerimizi etkilemez.
+              alışverişlerden komisyon kazanabiliriz.
             </p>
           </section>
 
           <section className={styles.section}>
-            <h2>5. Verilerin Korunması</h2>
-            <p>
-              Topladığımız verileri korumak için makul güvenlik önlemleri alıyoruz. Ancak internet üzerinden
-              hiçbir veri iletiminin %100 güvenli olmadığını belirtmeliyiz.
-            </p>
-          </section>
-
-          <section className={styles.section}>
-            <h2>6. Değişiklikler</h2>
+            <h2>5. Değişiklikler</h2>
             <p>
               Bu gizlilik politikasını zaman zaman güncelleyebiliriz. Değişiklikler bu sayfada yayınlandıktan
               sonra geçerli olur.

@@ -12,8 +12,8 @@
   margin-bottom: var(--space-4);
 }
 .icon {
-  width: 56px;
-  height: 56px;
+  width: 96px;
+  height: 96px;
   object-fit: contain;
 }
 .dateRange { color: var(--color-text-secondary); margin-top: var(--space-2); }

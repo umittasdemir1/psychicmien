@@ -1,0 +1,133 @@
+{
+  "nav": {
+    "horoscopes": "Burçlar",
+    "tarot": "Tarot",
+    "blog": "Blog",
+    "spiritual": "Spiritüel",
+    "shop": "Mağaza"
+  },
+  "footer": {
+    "tagline": "Tarot, burçlar ve spiritüel rehberlik.",
+    "pages": "Sayfalar",
+    "legal": "Yasal",
+    "privacy": "Gizlilik",
+    "terms": "Kullanım Şartları",
+    "about": "Hakkında",
+    "copyright": "Tüm hakları saklıdır."
+  },
+  "home": {
+    "hero": {
+      "title": "Evrenin Rehberliğiyle",
+      "subtitle": "Tarot okumları, burç yorumları ve spiritüel bilgelikle yolculuğunuzu aydınlatın.",
+      "cta_horoscopes": "Burç Yorumum",
+      "cta_tarot": "Tarot Keşfet"
+    },
+    "zodiac_section": "Burç Yorumları",
+    "zodiac_subtitle": "Günlük, haftalık ve aylık burç yorumlarına ulaş",
+    "shop_section": "Mistik Mağaza",
+    "shop_subtitle": "El yapımı spiritüel ürünler ve araçlar",
+    "shop_cta": "Mağazayı Gör",
+    "blog_section": "Son Yazılar",
+    "blog_subtitle": "Spiritüel bilgelik ve rehberlik",
+    "blog_cta": "Tüm Yazıları Gör",
+    "read_more": "Devamını Oku"
+  },
+  "horoscopes": {
+    "title": "Burç Yorumları",
+    "subtitle": "12 burç için günlük, haftalık ve aylık yorumlar",
+    "daily": "Günlük",
+    "weekly": "Haftalık",
+    "monthly": "Aylık",
+    "love": "Aşk",
+    "career": "Kariyer",
+    "health": "Sağlık",
+    "lucky_number": "Şanslı Sayı",
+    "lucky_color": "Şanslı Renk",
+    "no_content": "Henüz yorum eklenmedi.",
+    "date_range_label": "Tarih Aralığı"
+  },
+  "zodiac": {
+    "aries": "Koç",
+    "taurus": "Boğa",
+    "gemini": "İkizler",
+    "cancer": "Yengeç",
+    "leo": "Aslan",
+    "virgo": "Başak",
+    "libra": "Terazi",
+    "scorpio": "Akrep",
+    "sagittarius": "Yay",
+    "capricorn": "Oğlak",
+    "aquarius": "Kova",
+    "pisces": "Balık"
+  },
+  "zodiacDates": {
+    "aries":       "21 Mar – 19 Nis",
+    "taurus":      "20 Nis – 20 May",
+    "gemini":      "21 May – 20 Haz",
+    "cancer":      "21 Haz – 22 Tem",
+    "leo":         "23 Tem – 22 Ağu",
+    "virgo":       "23 Ağu – 22 Eyl",
+    "libra":       "23 Eyl – 22 Eki",
+    "scorpio":     "23 Eki – 21 Kas",
+    "sagittarius": "22 Kas – 21 Ara",
+    "capricorn":   "22 Ara – 19 Oca",
+    "aquarius":    "20 Oca – 18 Şub",
+    "pisces":      "19 Şub – 20 Mar"
+  },
+  "tarot": {
+    "title": "Tarot Rehberi",
+    "subtitle": "78 kartın anlamları, sembolleri ve yorumları",
+    "major_arcana": "Büyük Arkana",
+    "minor_arcana": "Küçük Arkana",
+    "cups": "Kupalar",
+    "wands": "Asalar",
+    "swords": "Kılıçlar",
+    "pentacles": "Pentakller",
+    "upright": "Dik Anlam",
+    "reversed": "Ters Anlam",
+    "keywords": "Anahtar Kelimeler",
+    "no_cards": "Kart bulunamadı.",
+    "back": "Tarot Rehberi'ne Dön"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Spiritüel bilgelik, rehberlik ve içgörüler",
+    "no_posts": "Henüz yazı yok.",
+    "read_more": "Devamını Oku",
+    "back": "Blog'a Dön"
+  },
+  "shop": {
+    "title": "Mistik Mağaza",
+    "subtitle": "El yapımı spiritüel araçlar, kristaller ve okuma destelerini keşfedin.",
+    "buy_on_etsy": "Etsy'de Satın Al",
+    "no_products": "Ürün bulunamadı.",
+    "featured": "Öne Çıkan"
+  },
+  "spiritual": {
+    "title": "Spiritüel Rehber",
+    "subtitle": "Kendinizi ve evreni daha derin anlamak için spiritüel araçlar, bilgelik ve rehberlik.",
+    "topics": "Konular",
+    "crystals": "Şifa Kristalleri",
+    "crystals_lead": "Kristaller, enerji çalışması ve spiritüel pratiğin vazgeçilmez araçlarıdır. Her kristal benzersiz titreşimler taşır.",
+    "meditation": "Meditasyon Rehberi",
+    "numerology": "Numeroloji: Yaşam Yolu Sayısı",
+    "numerology_lead": "Doğum tarihinizin rakamlarını toplayarak yaşam yolu sayınızı bulun.",
+    "dreams": "Yaygın Rüya Sembolleri",
+    "zodiac_guide": "Burç Rehberi"
+  },
+  "about": {
+    "title": "Hakkında"
+  },
+  "privacy": {
+    "title": "Gizlilik Politikası"
+  },
+  "terms": {
+    "title": "Kullanım Şartları"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Bir hata oluştu.",
+    "not_found": "Sayfa bulunamadı.",
+    "back_home": "Ana Sayfaya Dön"
+  }
+}

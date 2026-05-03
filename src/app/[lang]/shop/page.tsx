@@ -1,18 +1,39 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { createServerSupabaseClient } from '@/data/supabase/server';
 import { ProductRepository } from '@/data/repositories/ProductRepository';
 import { GetProducts } from '@/domain/usecases/GetProducts';
 import { buildMetadata } from '@/lib/seo';
+import { locales } from '@/i18n/config';
+import type { Locale } from '@/i18n/config';
+import { getDictionary } from '@/i18n/getDictionary';
 import styles from './shop.module.css';
 
-export const metadata: Metadata = buildMetadata({
-  title: 'Spiritüel Mağaza',
-  description: 'Tarot desteleri, kristaller, spiritüel kitaplar ve daha fazlası. Etsy mağazamızda keşfet.',
-});
+interface Props {
+  params: Promise<{ lang: string }>;
+}
 
 export const revalidate = 3600;
 
-export default async function ShopPage() {
+export async function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = await params;
+  if (!(locales as readonly string[]).includes(lang)) return {};
+  const dict = await getDictionary(lang as Locale);
+  return buildMetadata({
+    title: dict.shop.title,
+    description: dict.shop.subtitle,
+  });
+}
+
+export default async function ShopPage({ params }: Props) {
+  const { lang } = await params;
+  if (!(locales as readonly string[]).includes(lang)) notFound();
+  const dict = await getDictionary(lang as Locale);
+
   const supabase = await createServerSupabaseClient();
   const products = await new GetProducts(new ProductRepository(supabase)).execute(false).catch(() => []);
 
@@ -22,22 +43,22 @@ export default async function ShopPage() {
     <div className={styles.page}>
       <div className="container">
         <header className={styles.header}>
-          <h1>Spiritüel Mağaza</h1>
-          <p>Tarot desteleri, kristaller ve spiritüel araçlar — Etsy&apos;den güvenle satın al</p>
+          <h1>{dict.shop.title}</h1>
+          <p>{dict.shop.subtitle}</p>
         </header>
 
         {categories.length > 1 && (
           <div className={styles.filters}>
-            <a href="/shop" className={styles.filterBtn}>Tümü</a>
+            <a href={`/${lang}/shop`} className={styles.filterBtn}>All</a>
             {categories.map((cat) => (
-              <a key={cat} href={`/shop?category=${encodeURIComponent(cat)}`} className={styles.filterBtn}>{cat}</a>
+              <a key={cat} href={`/${lang}/shop?category=${encodeURIComponent(cat)}`} className={styles.filterBtn}>{cat}</a>
             ))}
           </div>
         )}
 
         {products.length === 0 ? (
           <div className={styles.empty}>
-            <p>Ürünler yakında eklenecek.</p>
+            <p>{dict.shop.no_products}</p>
           </div>
         ) : (
           <div className={styles.grid}>
@@ -49,7 +70,7 @@ export default async function ShopPage() {
                   ) : (
                     <div className={styles.imagePlaceholder}>✨</div>
                   )}
-                  {product.isFeatured && <span className={styles.featuredBadge}>Öne Çıkan</span>}
+                  {product.isFeatured && <span className={styles.featuredBadge}>{dict.shop.featured}</span>}
                 </div>
                 <div className={styles.body}>
                   {product.category && <span className={styles.category}>{product.category}</span>}
@@ -67,7 +88,7 @@ export default async function ShopPage() {
                       rel="noopener noreferrer sponsored"
                       className={styles.buyBtn}
                     >
-                      Etsy&apos;de Satın Al
+                      {dict.shop.buy_on_etsy}
                     </a>
                   </div>
                 </div>
@@ -75,10 +96,6 @@ export default async function ShopPage() {
             ))}
           </div>
         )}
-
-        <div className={styles.disclosure}>
-          <p>Bu sayfadaki Etsy bağlantıları üzerinden yapılan alışverişlerden komisyon kazanabiliriz.</p>
-        </div>
       </div>
     </div>
   );

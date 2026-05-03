@@ -1,0 +1,133 @@
+{
+  "nav": {
+    "horoscopes": "Horóscopos",
+    "tarot": "Tarot",
+    "blog": "Blog",
+    "spiritual": "Espiritual",
+    "shop": "Tienda"
+  },
+  "footer": {
+    "tagline": "Lecturas de tarot, horóscopos y orientación espiritual.",
+    "pages": "Páginas",
+    "legal": "Legal",
+    "privacy": "Privacidad",
+    "terms": "Términos de Uso",
+    "about": "Acerca de",
+    "copyright": "Todos los derechos reservados."
+  },
+  "home": {
+    "hero": {
+      "title": "Guiado por el Universo",
+      "subtitle": "Ilumina tu camino con lecturas de tarot, horóscopos y sabiduría espiritual.",
+      "cta_horoscopes": "Mi Horóscopo",
+      "cta_tarot": "Explorar Tarot"
+    },
+    "zodiac_section": "Horóscopos",
+    "zodiac_subtitle": "Lecturas diarias, semanales y mensuales",
+    "shop_section": "Tienda Mística",
+    "shop_subtitle": "Herramientas espirituales artesanales",
+    "shop_cta": "Ver Tienda",
+    "blog_section": "Últimas Entradas",
+    "blog_subtitle": "Sabiduría y orientación espiritual",
+    "blog_cta": "Ver Todo",
+    "read_more": "Leer Más"
+  },
+  "horoscopes": {
+    "title": "Horóscopos",
+    "subtitle": "Lecturas diarias, semanales y mensuales para los 12 signos",
+    "daily": "Diario",
+    "weekly": "Semanal",
+    "monthly": "Mensual",
+    "love": "Amor",
+    "career": "Carrera",
+    "health": "Salud",
+    "lucky_number": "Número de la Suerte",
+    "lucky_color": "Color de la Suerte",
+    "no_content": "Aún no hay lectura disponible.",
+    "date_range_label": "Rango de Fechas"
+  },
+  "zodiac": {
+    "aries": "Aries",
+    "taurus": "Tauro",
+    "gemini": "Géminis",
+    "cancer": "Cáncer",
+    "leo": "Leo",
+    "virgo": "Virgo",
+    "libra": "Libra",
+    "scorpio": "Escorpio",
+    "sagittarius": "Sagitario",
+    "capricorn": "Capricornio",
+    "aquarius": "Acuario",
+    "pisces": "Piscis"
+  },
+  "zodiacDates": {
+    "aries":       "21 mar – 19 abr",
+    "taurus":      "20 abr – 20 may",
+    "gemini":      "21 may – 20 jun",
+    "cancer":      "21 jun – 22 jul",
+    "leo":         "23 jul – 22 ago",
+    "virgo":       "23 ago – 22 sep",
+    "libra":       "23 sep – 22 oct",
+    "scorpio":     "23 oct – 21 nov",
+    "sagittarius": "22 nov – 21 dic",
+    "capricorn":   "22 dic – 19 ene",
+    "aquarius":    "20 ene – 18 feb",
+    "pisces":      "19 feb – 20 mar"
+  },
+  "tarot": {
+    "title": "Guía de Tarot",
+    "subtitle": "Significados, símbolos e interpretaciones de las 78 cartas",
+    "major_arcana": "Arcanos Mayores",
+    "minor_arcana": "Arcanos Menores",
+    "cups": "Copas",
+    "wands": "Bastos",
+    "swords": "Espadas",
+    "pentacles": "Oros",
+    "upright": "Significado Derecho",
+    "reversed": "Significado Invertido",
+    "keywords": "Palabras Clave",
+    "no_cards": "No se encontraron cartas.",
+    "back": "Volver a la Guía de Tarot"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Sabiduría espiritual, orientación e ideas",
+    "no_posts": "Aún no hay entradas.",
+    "read_more": "Leer Más",
+    "back": "Volver al Blog"
+  },
+  "shop": {
+    "title": "Tienda Mística",
+    "subtitle": "Descubre herramientas espirituales artesanales, cristales y mazos de lectura.",
+    "buy_on_etsy": "Comprar en Etsy",
+    "no_products": "No se encontraron productos.",
+    "featured": "Destacado"
+  },
+  "spiritual": {
+    "title": "Guía Espiritual",
+    "subtitle": "Herramientas espirituales, sabiduría y orientación para comprenderte a ti mismo y al universo.",
+    "topics": "Temas",
+    "crystals": "Cristales Sanadores",
+    "crystals_lead": "Los cristales son herramientas esenciales para el trabajo energético y la práctica espiritual.",
+    "meditation": "Guía de Meditación",
+    "numerology": "Numerología: Número de Camino de Vida",
+    "numerology_lead": "Suma los dígitos de tu fecha de nacimiento para encontrar tu número de camino de vida.",
+    "dreams": "Símbolos Comunes en los Sueños",
+    "zodiac_guide": "Guía del Zodíaco"
+  },
+  "about": {
+    "title": "Acerca de"
+  },
+  "privacy": {
+    "title": "Política de Privacidad"
+  },
+  "terms": {
+    "title": "Términos de Uso"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error.",
+    "not_found": "Página no encontrada.",
+    "back_home": "Volver al Inicio"
+  }
+}

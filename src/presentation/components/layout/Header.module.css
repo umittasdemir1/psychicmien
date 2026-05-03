@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: var(--color-surface);
+  background-color: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
 }
@@ -11,12 +11,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 56px;
 }
 
 .logo {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-primary);
   letter-spacing: -0.02em;
@@ -27,13 +27,16 @@
 }
 
 .nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  gap: var(--space-6);
 }
 
 .navLink {
-  font-size: 0.9375rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   color: var(--color-text-secondary);
   transition: color var(--transition);
@@ -44,34 +47,34 @@
   color: var(--color-primary);
 }
 
-.shopLink {
-  display: inline-flex;
+.langSwitcher {
+  display: flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-4);
-  background-color: var(--color-primary);
-  color: #fff !important;
-  border-radius: var(--radius-full);
-  font-size: 0.875rem;
+  gap: var(--space-1);
+}
+
+.langBtn {
+  font-size: 0.6875rem;
   font-weight: 600;
-  transition: background-color var(--transition);
+  color: var(--color-text-secondary);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+  transition: color var(--transition), background var(--transition);
 }
 
-.shopLink:hover {
-  background-color: var(--color-primary-dark);
+.langBtn:hover {
+  color: var(--color-primary);
+  background: var(--color-border);
 }
 
-.menuBtn {
-  display: none;
-  padding: var(--space-2);
-  color: var(--color-text);
+.langBtnActive {
+  color: var(--color-primary);
+  background: var(--color-border);
 }
 
 @media (max-width: 768px) {
   .nav {
     display: none;
-  }
-  .menuBtn {
-    display: flex;
   }
 }

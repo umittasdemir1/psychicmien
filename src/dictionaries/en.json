@@ -1,0 +1,133 @@
+{
+  "nav": {
+    "horoscopes": "Horoscopes",
+    "tarot": "Tarot",
+    "blog": "Blog",
+    "spiritual": "Spiritual",
+    "shop": "Shop"
+  },
+  "footer": {
+    "tagline": "Tarot readings, horoscopes, and spiritual guidance.",
+    "pages": "Pages",
+    "legal": "Legal",
+    "privacy": "Privacy",
+    "terms": "Terms of Use",
+    "about": "About",
+    "copyright": "All rights reserved."
+  },
+  "home": {
+    "hero": {
+      "title": "Guided by the Universe",
+      "subtitle": "Illuminate your journey with tarot readings, horoscope insights, and spiritual wisdom.",
+      "cta_horoscopes": "My Horoscope",
+      "cta_tarot": "Explore Tarot"
+    },
+    "zodiac_section": "Horoscopes",
+    "zodiac_subtitle": "Daily, weekly, and monthly horoscope readings",
+    "shop_section": "Mystic Shop",
+    "shop_subtitle": "Handcrafted spiritual tools and products",
+    "shop_cta": "Visit Shop",
+    "blog_section": "Latest Posts",
+    "blog_subtitle": "Spiritual wisdom and guidance",
+    "blog_cta": "View All Posts",
+    "read_more": "Read More"
+  },
+  "horoscopes": {
+    "title": "Horoscopes",
+    "subtitle": "Daily, weekly, and monthly readings for all 12 signs",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "love": "Love",
+    "career": "Career",
+    "health": "Health",
+    "lucky_number": "Lucky Number",
+    "lucky_color": "Lucky Color",
+    "no_content": "No reading available yet.",
+    "date_range_label": "Date Range"
+  },
+  "zodiac": {
+    "aries": "Aries",
+    "taurus": "Taurus",
+    "gemini": "Gemini",
+    "cancer": "Cancer",
+    "leo": "Leo",
+    "virgo": "Virgo",
+    "libra": "Libra",
+    "scorpio": "Scorpio",
+    "sagittarius": "Sagittarius",
+    "capricorn": "Capricorn",
+    "aquarius": "Aquarius",
+    "pisces": "Pisces"
+  },
+  "zodiacDates": {
+    "aries":       "Mar 21 – Apr 19",
+    "taurus":      "Apr 20 – May 20",
+    "gemini":      "May 21 – Jun 20",
+    "cancer":      "Jun 21 – Jul 22",
+    "leo":         "Jul 23 – Aug 22",
+    "virgo":       "Aug 23 – Sep 22",
+    "libra":       "Sep 23 – Oct 22",
+    "scorpio":     "Oct 23 – Nov 21",
+    "sagittarius": "Nov 22 – Dec 21",
+    "capricorn":   "Dec 22 – Jan 19",
+    "aquarius":    "Jan 20 – Feb 18",
+    "pisces":      "Feb 19 – Mar 20"
+  },
+  "tarot": {
+    "title": "Tarot Guide",
+    "subtitle": "Meanings, symbols, and interpretations of all 78 cards",
+    "major_arcana": "Major Arcana",
+    "minor_arcana": "Minor Arcana",
+    "cups": "Cups",
+    "wands": "Wands",
+    "swords": "Swords",
+    "pentacles": "Pentacles",
+    "upright": "Upright Meaning",
+    "reversed": "Reversed Meaning",
+    "keywords": "Keywords",
+    "no_cards": "No cards found.",
+    "back": "Back to Tarot Guide"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Spiritual wisdom, guidance, and insights",
+    "no_posts": "No posts yet.",
+    "read_more": "Read More",
+    "back": "Back to Blog"
+  },
+  "shop": {
+    "title": "Mystic Shop",
+    "subtitle": "Discover handcrafted spiritual tools, crystals, and reading decks.",
+    "buy_on_etsy": "Buy on Etsy",
+    "no_products": "No products found.",
+    "featured": "Featured"
+  },
+  "spiritual": {
+    "title": "Spiritual Guide",
+    "subtitle": "Spiritual tools, wisdom, and guidance to understand yourself and the universe more deeply.",
+    "topics": "Topics",
+    "crystals": "Healing Crystals",
+    "crystals_lead": "Crystals are essential tools for energy work and spiritual practice. Each crystal carries unique vibrations.",
+    "meditation": "Meditation Guide",
+    "numerology": "Numerology: Life Path Number",
+    "numerology_lead": "Add the digits of your birth date to find your life path number.",
+    "dreams": "Common Dream Symbols",
+    "zodiac_guide": "Zodiac Guide"
+  },
+  "about": {
+    "title": "About"
+  },
+  "privacy": {
+    "title": "Privacy Policy"
+  },
+  "terms": {
+    "title": "Terms of Use"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred.",
+    "not_found": "Page not found.",
+    "back_home": "Back to Home"
+  }
+}

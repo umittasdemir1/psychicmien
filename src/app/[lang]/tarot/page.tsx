@@ -1,19 +1,40 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { createServerSupabaseClient } from '@/data/supabase/server';
 import { TarotRepository } from '@/data/repositories/TarotRepository';
 import { GetTarotCards } from '@/domain/usecases/GetTarotCards';
 import { buildMetadata } from '@/lib/seo';
+import { locales } from '@/i18n/config';
+import type { Locale } from '@/i18n/config';
+import { getDictionary } from '@/i18n/getDictionary';
 import styles from './tarot.module.css';
 
-export const metadata: Metadata = buildMetadata({
-  title: 'Tarot Rehberi',
-  description: '78 tarot kartının anlamları, anahtar kelimeleri ve yorumları. Major ve Minor Arcana rehberi.',
-});
+interface Props {
+  params: Promise<{ lang: string }>;
+}
 
 export const revalidate = 86400;
 
-export default async function TarotPage() {
+export async function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = await params;
+  if (!(locales as readonly string[]).includes(lang)) return {};
+  const dict = await getDictionary(lang as Locale);
+  return buildMetadata({
+    title: dict.tarot.title,
+    description: dict.tarot.subtitle,
+  });
+}
+
+export default async function TarotPage({ params }: Props) {
+  const { lang } = await params;
+  if (!(locales as readonly string[]).includes(lang)) notFound();
+  const dict = await getDictionary(lang as Locale);
+
   const supabase = await createServerSupabaseClient();
   const cards = await new GetTarotCards(new TarotRepository(supabase)).execute().catch(() => []);
 
@@ -22,28 +43,31 @@ export default async function TarotPage() {
   const suits = Array.from(new Set(minor.map((c) => c.suit).filter(Boolean))) as string[];
 
   const SUIT_LABELS: Record<string, string> = {
-    cups: 'Kupalar', wands: 'Asalar', swords: 'Kılıçlar', pentacles: 'Pentaküller',
+    cups: dict.tarot.cups,
+    wands: dict.tarot.wands,
+    swords: dict.tarot.swords,
+    pentacles: dict.tarot.pentacles,
   };
 
   return (
     <div className={styles.page}>
       <div className="container">
         <header className={styles.header}>
-          <h1>Tarot Rehberi</h1>
-          <p>78 kartın anlamlarını, sembolizmini ve yorumlarını keşfet</p>
+          <h1>{dict.tarot.title}</h1>
+          <p>{dict.tarot.subtitle}</p>
         </header>
 
         {cards.length === 0 ? (
           <p style={{ textAlign: 'center', color: 'var(--color-text-secondary)', padding: 'var(--space-16) 0' }}>
-            Kartlar yakında eklenecek.
+            {dict.tarot.no_cards}
           </p>
         ) : (
           <>
             {major.length > 0 && (
               <section className={styles.arcana}>
-                <h2>Major Arcana <span>({major.length} kart)</span></h2>
+                <h2>{dict.tarot.major_arcana} <span>({major.length})</span></h2>
                 <div className={styles.grid}>
-                  {major.map((card) => <TarotCardItem key={card.id} card={card} />)}
+                  {major.map((card) => <TarotCardItem key={card.id} card={card} lang={lang} />)}
                 </div>
               </section>
             )}
@@ -52,9 +76,9 @@ export default async function TarotPage() {
               const suitCards = minor.filter((c) => c.suit === suit);
               return (
                 <section key={suit} className={styles.arcana}>
-                  <h2>{SUIT_LABELS[suit] ?? suit} <span>({suitCards.length} kart)</span></h2>
+                  <h2>{SUIT_LABELS[suit] ?? suit} <span>({suitCards.length})</span></h2>
                   <div className={styles.grid}>
-                    {suitCards.map((card) => <TarotCardItem key={card.id} card={card} />)}
+                    {suitCards.map((card) => <TarotCardItem key={card.id} card={card} lang={lang} />)}
                   </div>
                 </section>
               );
@@ -66,9 +90,9 @@ export default async function TarotPage() {
   );
 }
 
-function TarotCardItem({ card }: { card: { slug: string; name: string; imageUrl: string | null; cardNumber: number | null; keywords: string[] } }) {
+function TarotCardItem({ card, lang }: { card: { slug: string; name: string; imageUrl: string | null; cardNumber: number | null; keywords: string[] }; lang: string }) {
   return (
-    <Link href={`/tarot/${card.slug}`} className={styles.card}>
+    <Link href={`/${lang}/tarot/${card.slug}`} className={styles.card}>
       <div className={styles.cardImage}>
         {card.imageUrl ? (
           <img src={card.imageUrl} alt={card.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />

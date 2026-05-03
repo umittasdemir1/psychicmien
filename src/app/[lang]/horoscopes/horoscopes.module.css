@@ -40,8 +40,8 @@
 .water { background: linear-gradient(135deg, #E8F4FD, #EFF8FE); }
 
 .icon {
-  width: 72px;
-  height: 72px;
+  width: 108px;
+  height: 108px;
   object-fit: contain;
 }
 

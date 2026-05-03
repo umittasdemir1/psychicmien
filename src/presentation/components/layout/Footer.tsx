@@ -1,60 +1,78 @@
 import Link from 'next/link';
 import { SITE_NAME } from '@/lib/constants';
+import type { Locale } from '@/i18n/config';
 import styles from './Footer.module.css';
 
-export function Footer() {
+interface FooterDict {
+  tagline: string;
+  pages: string;
+  legal: string;
+  privacy: string;
+  terms: string;
+  about: string;
+  copyright: string;
+}
+
+interface NavDict {
+  horoscopes: string;
+  tarot: string;
+  blog: string;
+  spiritual: string;
+  shop: string;
+}
+
+interface Props {
+  dict: { footer: FooterDict; nav: NavDict };
+  lang: Locale;
+}
+
+export function Footer({ dict, lang }: Props) {
   const year = new Date().getFullYear();
+  const { footer, nav } = dict;
 
   return (
     <footer className={styles.footer}>
       <div className="container">
         <div className={styles.grid}>
           <div className={styles.brand}>
-            <Link href="/" className={styles.logo}>
+            <Link href={`/${lang}`} className={styles.logo}>
               Psychic<span>Mien</span>
             </Link>
-            <p>Tarot okumları, burç yorumları ve spiritüel rehberlik.</p>
-            <p className={styles.affiliate}>
-              Bu site Amazon ve diğer affiliate ağlarına katılımcıdır. Bağlı
-              linklerden alışveriş yaparsanız komisyon kazanabiliriz.
-            </p>
+            <p>{footer.tagline}</p>
           </div>
 
           <div>
-            <p className={styles.colTitle}>Keşfet</p>
+            <p className={styles.colTitle}>{footer.pages}</p>
             <ul className={styles.links}>
-              <li><Link href="/horoscopes">Burçlar</Link></li>
-              <li><Link href="/tarot">Tarot</Link></li>
-              <li><Link href="/blog">Blog</Link></li>
-              <li><Link href="/spiritual">Spiritüel</Link></li>
+              <li><Link href={`/${lang}/horoscopes`}>{nav.horoscopes}</Link></li>
+              <li><Link href={`/${lang}/tarot`}>{nav.tarot}</Link></li>
+              <li><Link href={`/${lang}/blog`}>{nav.blog}</Link></li>
+              <li><Link href={`/${lang}/spiritual`}>{nav.spiritual}</Link></li>
             </ul>
           </div>
 
           <div>
-            <p className={styles.colTitle}>Mağaza</p>
+            <p className={styles.colTitle}>{footer.pages}</p>
             <ul className={styles.links}>
-              <li><Link href="/shop">Tüm Ürünler</Link></li>
-              <li><Link href="/shop?category=tarot">Tarot Destesi</Link></li>
-              <li><Link href="/shop?category=crystals">Kristaller</Link></li>
-              <li><Link href="/shop?category=books">Kitaplar</Link></li>
+              <li><Link href={`/${lang}/shop`}>{nav.shop}</Link></li>
             </ul>
           </div>
 
           <div>
-            <p className={styles.colTitle}>Hakkında</p>
+            <p className={styles.colTitle}>{footer.legal}</p>
             <ul className={styles.links}>
-              <li><Link href="/about">Hakkımızda</Link></li>
-              <li><Link href="/privacy">Gizlilik</Link></li>
-              <li><Link href="/terms">Kullanım Şartları</Link></li>
+              <li><Link href={`/${lang}/about`}>{footer.about}</Link></li>
+              <li><Link href={`/${lang}/privacy`}>{footer.privacy}</Link></li>
+              <li><Link href={`/${lang}/terms`}>{footer.terms}</Link></li>
             </ul>
           </div>
         </div>
 
         <div className={styles.bottom}>
-          <p>© {year} {SITE_NAME}. Tüm hakları saklıdır.</p>
-          <nav className={styles.legalLinks} aria-label="Hukuki bağlantılar">
-            <Link href="/privacy">Gizlilik Politikası</Link>
-            <Link href="/terms">Şartlar</Link>
+          <p>© {year} {SITE_NAME}. {footer.copyright}</p>
+          <nav className={styles.legalLinks} aria-label="Legal links">
+            <Link href={`/${lang}/privacy`}>{footer.privacy}</Link>
+            <Link href={`/${lang}/terms`}>{footer.terms}</Link>
           </nav>
         </div>
       </div>

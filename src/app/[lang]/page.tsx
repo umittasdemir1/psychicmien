@@ -1,42 +1,76 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { createServerSupabaseClient } from '@/data/supabase/server';
 import { ProductRepository } from '@/data/repositories/ProductRepository';
 import { BlogRepository } from '@/data/repositories/BlogRepository';
 import { GetProducts } from '@/domain/usecases/GetProducts';
 import { GetBlogPosts } from '@/domain/usecases/GetBlogPosts';
 import { LinkButton } from '@/presentation/components/shared/Button';
-import { ZODIAC_SIGNS, SITE_DESCRIPTION } from '@/lib/constants';
+import { ZODIAC_SIGNS, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/constants';
 import { formatDate, truncate } from '@/lib/utils';
-import styles from './page.module.css';
+import { locales } from '@/i18n/config';
+import type { Locale } from '@/i18n/config';
+import { getDictionary } from '@/i18n/getDictionary';
+import styles from '../page.module.css';
 
-export const metadata: Metadata = {
-  title: 'PsychicMien — Tarot, Burçlar & Spiritüel Rehberlik',
-  description: SITE_DESCRIPTION,
-};
+interface Props {
+  params: Promise<{ lang: string }>;
+}
 
 export const revalidate = 3600;
 
-export default async function HomePage() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = await params;
+  return {
+    title: `PsychicMien — Tarot, ${lang === 'tr' ? 'Burçlar & Spiritüel Rehberlik' : lang === 'es' ? 'Horóscopos & Guía Espiritual' : 'Horoscopes & Spiritual Guidance'}`,
+    description: SITE_DESCRIPTION,
+  };
+}
+
+export default async function HomePage({ params }: Props) {
+  const { lang } = await params;
+  if (!(locales as readonly string[]).includes(lang)) notFound();
+
+  const dict = await getDictionary(lang as Locale);
+
+  const websiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: SITE_URL,
+    description: SITE_DESCRIPTION,
+    inLanguage: lang,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${SITE_URL}/${lang}/blog?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
   const supabase = await createServerSupabaseClient();
   const products = await new GetProducts(new ProductRepository(supabase)).execute(true).catch(() => []);
   const posts = await new GetBlogPosts(new BlogRepository(supabase)).execute(true).catch(() => []);
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
       {/* Zodiac Picker */}
       <section className={styles.zodiacSection}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <h2>Burç Yorumları</h2>
-            <p>Günlük, haftalık ve aylık burç yorumlarına ulaş</p>
+            <h2>{dict.home.zodiac_section}</h2>
+            <p>{dict.home.zodiac_subtitle}</p>
           </div>
           <div className={styles.zodiacGrid}>
             {ZODIAC_SIGNS.map((sign) => (
-              <Link key={sign.slug} href={`/horoscopes/${sign.slug}`} className={styles.zodiacCard}>
+              <Link key={sign.slug} href={`/${lang}/horoscopes/${sign.slug}`} className={styles.zodiacCard}>
                 <img className={styles.zodiacIcon} src={sign.icon} alt="" aria-hidden="true" />
-                <span className={styles.zodiacName}>{sign.name}</span>
-                <span className={styles.zodiacDate}>{sign.dateRange}</span>
+                <span className={styles.zodiacName}>{dict.zodiac[sign.slug as keyof typeof dict.zodiac]}</span>
+                <span className={styles.zodiacDate}>{dict.zodiacDates[sign.slug as keyof typeof dict.zodiacDates]}</span>
               </Link>
             ))}
           </div>
@@ -48,8 +82,8 @@ export default async function HomePage() {
         <section className={styles.shopSection}>
           <div className="container">
             <div className={styles.sectionHeader}>
-              <h2>Spiritüel Mağaza</h2>
-              <p>Tarot desteleri, kristaller ve spiritüel araçlar</p>
+              <h2>{dict.home.shop_section}</h2>
+              <p>{dict.home.shop_subtitle}</p>
             </div>
             <div className={styles.productGrid}>
               {products.slice(0, 3).map((product) => (
@@ -86,14 +120,14 @@ export default async function HomePage() {
                         fontWeight: 600,
                       }}
                     >
-                      Etsy&apos;de Gör
+                      {dict.shop.buy_on_etsy}
                     </a>
                   </div>
                 </article>
               ))}
             </div>
             <div className={styles.sectionFooter}>
-              <LinkButton href="/shop" variant="secondary">Tüm Ürünleri Gör</LinkButton>
+              <LinkButton href={`/${lang}/shop`} variant="secondary">{dict.home.shop_cta}</LinkButton>
             </div>
           </div>
         </section>
@@ -104,8 +138,8 @@ export default async function HomePage() {
         <section className={styles.blogSection}>
           <div className="container">
             <div className={styles.sectionHeader}>
-              <h2>Son Yazılar</h2>
-              <p>Spiritüel bilgelik, tarot rehberleri ve daha fazlası</p>
+              <h2>{dict.home.blog_section}</h2>
+              <p>{dict.home.blog_subtitle}</p>
             </div>
             <div className={styles.blogGrid}>
               {posts.slice(0, 3).map((post) => (
@@ -131,7 +165,7 @@ export default async function HomePage() {
                       }}>{post.category}</span>
                     )}
                     <h3 style={{ fontSize: '1.125rem', margin: 'var(--space-2) 0' }}>
-                      <Link href={`/blog/${post.slug}`} style={{ color: 'inherit' }}>
+                      <Link href={`/${lang}/blog/${post.slug}`} style={{ color: 'inherit' }}>
                         {post.title}
                       </Link>
                     </h3>
@@ -150,7 +184,7 @@ export default async function HomePage() {
               ))}
             </div>
             <div className={styles.sectionFooter}>
-              <LinkButton href="/blog" variant="secondary">Tüm Yazıları Gör</LinkButton>
+              <LinkButton href={`/${lang}/blog`} variant="secondary">{dict.home.blog_cta}</LinkButton>
             </div>
           </div>
         </section>

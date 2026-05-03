@@ -1,20 +1,38 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { buildMetadata } from '@/lib/seo';
+import { locales } from '@/i18n/config';
+import type { Locale } from '@/i18n/config';
+import { getDictionary } from '@/i18n/getDictionary';
 import styles from './about.module.css';
 
-export const metadata: Metadata = buildMetadata({
-  title: 'Hakkımızda',
-  description: 'PsychicMien hakkında — spiritüel rehberlik, tarot okumaları ve burç yorumları platformumuz.',
-});
+interface Props {
+  params: Promise<{ lang: string }>;
+}
 
-export default function AboutPage() {
+export async function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = await params;
+  if (!(locales as readonly string[]).includes(lang)) return {};
+  const dict = await getDictionary(lang as Locale);
+  return buildMetadata({ title: dict.about.title });
+}
+
+export default async function AboutPage({ params }: Props) {
+  const { lang } = await params;
+  if (!(locales as readonly string[]).includes(lang)) notFound();
+  const dict = await getDictionary(lang as Locale);
+
   return (
     <div className={styles.page}>
       <div className="container">
         <div className={styles.content}>
           <header className={styles.header}>
             <span className={styles.icon}>🔮</span>
-            <h1 className={styles.title}>Hakkımızda</h1>
+            <h1 className={styles.title}>{dict.about.title}</h1>
             <p className={styles.lead}>
               PsychicMien, spiritüel rehberlik arayışındakilere kapsamlı ve güvenilir içerik sunmak amacıyla kurulmuştur.
             </p>
@@ -33,10 +51,10 @@ export default function AboutPage() {
             <h2>Ne Sunuyoruz?</h2>
             <div className={styles.offerGrid}>
               {[
-                { icon: '🃏', title: 'Tarot Rehberi', desc: '78 kartın detaylı anlamları, yayılımlar ve günlük okumaları.' },
-                { icon: '⭐', title: 'Burç Yorumları', desc: 'Günlük, haftalık ve aylık burç yorumları.' },
-                { icon: '📖', title: 'Blog', desc: 'Spiritüel yaşam, kişisel gelişim ve mistik konularda derinlemesine yazılar.' },
-                { icon: '🛍️', title: 'Spiritüel Mağaza', desc: 'Etsy üzerinden tarot desteleri, kristaller ve spiritüel araçlar.' },
+                { icon: '🃏', title: dict.nav.tarot, desc: dict.tarot.subtitle },
+                { icon: '⭐', title: dict.nav.horoscopes, desc: dict.horoscopes.subtitle },
+                { icon: '📖', title: dict.nav.blog, desc: dict.blog.subtitle },
+                { icon: '🛍️', title: dict.nav.shop, desc: dict.shop.subtitle },
               ].map((item) => (
                 <div key={item.title} className={styles.offerCard}>
                   <span className={styles.offerIcon}>{item.icon}</span>
@@ -45,15 +63,6 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-          </section>
-
-          <section className={styles.section}>
-            <h2>Yaklaşımımız</h2>
-            <p>
-              Spiritüel içeriklerimizi bilimsel bir iddia olarak sunmuyoruz. Tarot okumalarını, burç yorumlarını
-              ve diğer spiritüel araçları kişisel yansıma ve içgözlem için birer araç olarak değerlendiriyoruz.
-              Her bireyin kendi deneyimini ve yorumunu en değerli rehber olarak görmesini destekliyoruz.
-            </p>
           </section>
 
           <section className={styles.section}>
