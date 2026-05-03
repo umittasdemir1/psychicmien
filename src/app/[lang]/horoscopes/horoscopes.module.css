@@ -46,8 +46,8 @@
 }
 
 .cardBody { padding: var(--space-4) var(--space-6) var(--space-6); }
-.name { font-size: 1.25rem; font-weight: 600; font-family: var(--font-heading); }
-.dateRange { font-size: 0.8125rem; color: var(--color-text-secondary); margin-top: var(--space-1); }
+.name { font-size: 1.5rem; font-weight: 500; font-family: 'Rubik', sans-serif; }
+.dateRange { font-size: 1rem; font-family: 'Rubik', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.01em; color: #4A4757; margin-top: var(--space-1); }
 .elementBadge {
   display: inline-block;
   margin-top: var(--space-3);

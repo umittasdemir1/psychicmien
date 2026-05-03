@@ -36,7 +36,7 @@ export function Footer({ dict, lang }: Props) {
         <div className={styles.grid}>
           <div className={styles.brand}>
             <Link href={`/${lang}`} className={styles.logo}>
-              Psychic<span>Mien</span>
+              <img src="/images/logo-dark.svg" alt="PsychicMien" width={160} height={40} />
             </Link>
             <p>{footer.tagline}</p>
           </div>

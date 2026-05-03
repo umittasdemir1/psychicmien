@@ -40,7 +40,7 @@ export function Header({ dict, lang }: Props) {
     <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
         <Link href={`/${lang}`} className={styles.logo}>
-          Psychic<span>Mien</span>
+          <img src="/images/logo-light.svg" alt="PsychicMien" width={160} height={40} />
         </Link>
 
         <nav className={styles.nav} aria-label="Ana navigasyon">
