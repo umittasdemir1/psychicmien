@@ -62,7 +62,10 @@ export default async function HomePage({ params }: Props) {
       <section className={styles.zodiacSection}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <h2>{dict.home.zodiac_section}</h2>
+            <h2 className={styles.welcomeHeading}>
+              {dict.home.zodiac_section}
+              <img src="/images/logo-light.svg" alt="PsychicMien" className={styles.welcomeLogo} />
+            </h2>
             <p>{dict.home.zodiac_subtitle}</p>
           </div>
           <div className={styles.zodiacGrid}>
@@ -73,6 +76,42 @@ export default async function HomePage({ params }: Props) {
                 <span className={styles.zodiacDate}>{dict.zodiacDates[sign.slug as keyof typeof dict.zodiacDates]}</span>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Tarot Section */}
+      <section className={styles.tarotSection}>
+        <div className="container">
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.welcomeHeading}>{dict.home.tarot_section}</h2>
+            <p>{dict.home.tarot_subtitle}</p>
+          </div>
+          <div className={styles.tarotWrapper}>
+            {/* Featured card — left */}
+            <div className={styles.tarotFeatured}>
+              <h3 className={styles.tarotFeaturedTitle}>{dict.home.tarot_featured_title}</h3>
+              <p className={styles.tarotFeaturedDesc}>{dict.home.tarot_featured_desc}</p>
+              <button className={styles.tarotFeaturedBtn}>{dict.home.tarot_featured_cta}</button>
+            </div>
+
+            {/* 2x2 grid — right */}
+            <div className={styles.tarotGrid}>
+              {[
+                { key: 'career',   label: dict.home.tarot_career,   img: '/images/tarot/career.svg' },
+                { key: 'love',     label: dict.home.tarot_love,     img: '/images/tarot/love.svg' },
+                { key: 'blind',    label: dict.home.tarot_blind,    img: '/images/tarot/blind.svg' },
+                { key: 'soulmate', label: dict.home.tarot_soulmate, img: '/images/tarot/soulmate.svg' },
+              ].map((card) => (
+                <div key={card.key} className={styles.tarotCard}>
+                  <div className={styles.tarotCardContent}>
+                    <h3 className={styles.tarotCardTitle}>{card.label}</h3>
+                    <span className={styles.tarotReadMore}>{dict.home.tarot_read_more}</span>
+                  </div>
+                  <img src={card.img} alt="" aria-hidden="true" className={styles.tarotCardImg} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

@@ -42,7 +42,134 @@
 
 /* ─── Zodiac Picker ──────────────────────────────── */
 .zodiacSection {
-  padding-block: var(--space-20) var(--space-16);
+  padding-block: var(--space-24) var(--space-16);
+}
+
+.welcomeHeading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.welcomeLogo {
+  height: 48px;
+  width: auto;
+}
+
+/* ─── Tarot Section ──────────────────────────────── */
+.tarotSection {
+  padding-block: var(--space-16);
+  background: var(--color-bg);
+}
+
+.tarotWrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-4);
+  align-items: stretch;
+}
+
+.tarotFeatured {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  background: linear-gradient(160deg, #4ecdc4 0%, #6B4EAA 100%);
+  gap: var(--space-3);
+  cursor: pointer;
+}
+
+.tarotFeaturedTitle {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.tarotFeaturedDesc {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.5;
+}
+
+.tarotFeaturedBtn {
+  margin-top: var(--space-6);
+  padding: var(--space-2) var(--space-6);
+  background: rgba(255,255,255,0.9);
+  color: var(--color-primary-dark);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: 'Rubik', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.tarotFeaturedBtn:hover {
+  background: #fff;
+}
+
+.tarotGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.tarotCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: #7B6BB5;
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-4);
+  gap: var(--space-3);
+  cursor: pointer;
+  transition: filter var(--transition);
+}
+
+.tarotCard:hover {
+  filter: brightness(1.08);
+}
+
+.tarotCardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.tarotCardTitle {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.375rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.tarotReadMore {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: 0.03em;
+}
+
+.tarotCardImg {
+  flex-shrink: 0;
+  width: 80px;
+  height: 100px;
+  object-fit: contain;
 }
 
 .sectionHeader {
@@ -77,8 +204,8 @@
 }
 
 .zodiacIcon {
-  width: 144px;
-  height: 144px;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
 }
 
@@ -136,8 +263,10 @@
 
 @media (max-width: 640px) {
   .zodiacGrid { grid-template-columns: repeat(3, 1fr); }
-  .zodiacIcon { width: 108px; height: 108px; }
+  .zodiacIcon { width: 80px; height: 80px; }
   .zodiacName { font-size: 1rem; }
   .productGrid, .blogGrid { grid-template-columns: 1fr; }
   .zodiacSection { padding-block: var(--space-12); }
+  .tarotWrapper { grid-template-columns: 1fr; }
+  .tarotGrid { grid-template-columns: repeat(2, 1fr); }
 }
