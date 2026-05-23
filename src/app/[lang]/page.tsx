@@ -98,14 +98,14 @@ export default async function HomePage({ params }: Props) {
             {/* 2x2 grid — right */}
             <div className={styles.tarotGrid}>
               {[
-                { key: 'career',   label: dict.home.tarot_career,   img: '/images/tarot/career.svg' },
-                { key: 'love',     label: dict.home.tarot_love,     img: '/images/tarot/love.svg' },
-                { key: 'blind',    label: dict.home.tarot_blind,    img: '/images/tarot/blind.svg' },
-                { key: 'soulmate', label: dict.home.tarot_soulmate, img: '/images/tarot/soulmate.svg' },
+                { key: 'career',   label: dict.home.tarot_career,   img: '/images/tarot/career.png' },
+                { key: 'love',     label: dict.home.tarot_love,     img: '/images/tarot/love.png' },
+                { key: 'blind',    label: dict.home.tarot_blind,    img: '/images/tarot/blind.png' },
+                { key: 'soulmate', label: dict.home.tarot_soulmate, img: '/images/tarot/soulmate.png' },
               ].map((card) => (
                 <div key={card.key} className={styles.tarotCard}>
                   <div className={styles.tarotCardImgWrap}>
-                    <Image src={card.img} alt="" width={80} height={100} aria-hidden="true" className={styles.tarotCardImg} />
+                    <Image src={card.img} alt="" width={96} height={96} aria-hidden="true" className={styles.tarotCardImg} />
                   </div>
                   <div className={styles.tarotCardContent}>
                     <h3 className={styles.tarotCardTitle}>{card.label}</h3>

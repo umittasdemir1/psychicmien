@@ -85,7 +85,7 @@
   border: 1.5px solid var(--color-border);
   gap: var(--space-3);
   cursor: pointer;
-  width: calc(2 * (100px + 10px + 3px) + var(--space-3));
+  width: calc(2 * (96px + 10px + 3px) + var(--space-3));
   aspect-ratio: 1 / 1;
   justify-self: start;
   overflow: hidden;
@@ -149,7 +149,7 @@
   background: transparent;
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: 5px var(--space-4) 5px 0;
+  padding: 5px;
   gap: var(--space-3);
   cursor: pointer;
   transition: background var(--transition), box-shadow var(--transition);
@@ -187,8 +187,8 @@
 
 .tarotCardImgWrap {
   flex-shrink: 0;
-  width: 80px;
-  height: 100px;
+  width: 96px;
+  height: 96px;
   border-radius: var(--radius-md);
   overflow: hidden;
   display: flex;
@@ -304,12 +304,12 @@
     width: 100%;
     justify-self: stretch;
     aspect-ratio: auto;
-    height: calc(2 * (84px + 10px + 3px) + var(--space-3));
+    height: calc(2 * (80px + 10px + 3px) + var(--space-3));
     padding: var(--space-4) var(--space-6);
   }
   .tarotGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; }
-  .tarotCard { padding: 5px var(--space-4) 5px 0; }
+  .tarotCard { padding: 5px; }
   .tarotCardTitle { font-size: 1.125rem; }
   .tarotReadMore { font-size: 0.875rem; }
-  .tarotCardImgWrap { width: 64px; height: 84px; }
+  .tarotCardImgWrap { width: 80px; height: 80px; }
 }
