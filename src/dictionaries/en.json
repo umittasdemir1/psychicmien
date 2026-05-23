@@ -138,6 +138,8 @@
     "loading": "Loading...",
     "error": "An error occurred.",
     "not_found": "Page not found.",
-    "back_home": "Back to Home"
+    "back_home": "Back to Home",
+    "search": "Search for anything",
+    "sign_in": "Sign In"
   }
 }

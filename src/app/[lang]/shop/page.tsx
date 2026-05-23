@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { createServerSupabaseClient } from '@/data/supabase/server';
@@ -66,7 +67,7 @@ export default async function ShopPage({ params }: Props) {
               <article key={product.id} className={styles.card}>
                 <div className={styles.imageWrap}>
                   {product.imageUrl ? (
-                    <img src={product.imageUrl} alt={product.title} className={styles.image} />
+                    <Image src={product.imageUrl} alt={product.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className={styles.image} unoptimized />
                   ) : (
                     <div className={styles.imagePlaceholder}>✨</div>
                   )}

@@ -138,6 +138,8 @@
     "loading": "Yükleniyor...",
     "error": "Bir hata oluştu.",
     "not_found": "Sayfa bulunamadı.",
-    "back_home": "Ana Sayfaya Dön"
+    "back_home": "Ana Sayfaya Dön",
+    "search": "Herhangi bir şey ara",
+    "sign_in": "Giriş Yap"
   }
 }

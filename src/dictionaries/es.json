@@ -138,6 +138,8 @@
     "loading": "Cargando...",
     "error": "Ocurrió un error.",
     "not_found": "Página no encontrada.",
-    "back_home": "Volver al Inicio"
+    "back_home": "Volver al Inicio",
+    "search": "Busca cualquier cosa",
+    "sign_in": "Iniciar sesión"
   }
 }

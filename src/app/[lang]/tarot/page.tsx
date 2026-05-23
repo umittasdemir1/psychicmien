@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -95,7 +96,7 @@ function TarotCardItem({ card, lang }: { card: { slug: string; name: string; ima
     <Link href={`/${lang}/tarot/${card.slug}`} className={styles.card}>
       <div className={styles.cardImage}>
         {card.imageUrl ? (
-          <img src={card.imageUrl} alt={card.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <Image src={card.imageUrl} alt={card.name} fill sizes="(max-width: 640px) 33vw, (max-width: 900px) 25vw, (max-width: 1200px) 20vw, 16vw" style={{ objectFit: 'cover' }} unoptimized />
         ) : (
           <span className={styles.cardPlaceholder}>🔮</span>
         )}

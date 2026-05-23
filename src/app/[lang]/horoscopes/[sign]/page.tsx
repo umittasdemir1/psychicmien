@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/data/supabase/server';
@@ -64,7 +65,7 @@ export default async function SignPage({ params }: Props) {
       <div className="container">
         <header className={styles.header}>
           <div className={styles.symbolWrap}>
-            <img className={styles.icon} src={signData.icon} alt="" aria-hidden="true" />
+            <Image className={styles.icon} src={signData.icon} alt="" width={96} height={96} aria-hidden="true" />
           </div>
           <h1>{signName}</h1>
           <p className={styles.dateRange}>{dict.zodiacDates[sign as keyof typeof dict.zodiacDates] ?? signData.dateRange}</p>

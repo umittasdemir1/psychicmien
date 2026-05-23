@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -64,14 +65,14 @@ export default async function HomePage({ params }: Props) {
           <div className={styles.sectionHeader}>
             <h2 className={styles.welcomeHeading}>
               {dict.home.zodiac_section}
-              <img src="/images/logo-light.svg" alt="PsychicMien" className={styles.welcomeLogo} />
+              <Image src="/images/logo-light.svg" alt="PsychicMien" width={160} height={40} className={styles.welcomeLogo} loading="eager" />
             </h2>
             <p>{dict.home.zodiac_subtitle}</p>
           </div>
           <div className={styles.zodiacGrid}>
             {ZODIAC_SIGNS.map((sign) => (
               <Link key={sign.slug} href={`/${lang}/horoscopes/${sign.slug}`} className={styles.zodiacCard}>
-                <img className={styles.zodiacIcon} src={sign.icon} alt="" aria-hidden="true" />
+                <Image className={styles.zodiacIcon} src={sign.icon} alt="" width={100} height={100} aria-hidden="true" />
                 <span className={styles.zodiacName}>{dict.zodiac[sign.slug as keyof typeof dict.zodiac]}</span>
                 <span className={styles.zodiacDate}>{dict.zodiacDates[sign.slug as keyof typeof dict.zodiacDates]}</span>
               </Link>
@@ -91,7 +92,6 @@ export default async function HomePage({ params }: Props) {
             {/* Featured card — left */}
             <div className={styles.tarotFeatured}>
               <h3 className={styles.tarotFeaturedTitle}>{dict.home.tarot_featured_title}</h3>
-              <p className={styles.tarotFeaturedDesc}>{dict.home.tarot_featured_desc}</p>
               <button className={styles.tarotFeaturedBtn}>{dict.home.tarot_featured_cta}</button>
             </div>
 
@@ -104,11 +104,12 @@ export default async function HomePage({ params }: Props) {
                 { key: 'soulmate', label: dict.home.tarot_soulmate, img: '/images/tarot/soulmate.svg' },
               ].map((card) => (
                 <div key={card.key} className={styles.tarotCard}>
+                  <div className={styles.tarotCardImgWrap}>
+                    <Image src={card.img} alt="" width={80} height={100} aria-hidden="true" className={styles.tarotCardImg} />
+                  </div>
                   <div className={styles.tarotCardContent}>
                     <h3 className={styles.tarotCardTitle}>{card.label}</h3>
-                    <span className={styles.tarotReadMore}>{dict.home.tarot_read_more}</span>
                   </div>
-                  <img src={card.img} alt="" aria-hidden="true" className={styles.tarotCardImg} />
                 </div>
               ))}
             </div>
@@ -133,8 +134,8 @@ export default async function HomePage({ params }: Props) {
                   overflow: 'hidden',
                 }}>
                   {product.imageUrl && (
-                    <div style={{ aspectRatio: '4/3', background: 'var(--color-border)' }}>
-                      <img src={product.imageUrl} alt={product.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <div style={{ position: 'relative', aspectRatio: '4/3', background: 'var(--color-border)' }}>
+                      <Image src={product.imageUrl} alt={product.title} fill sizes="(max-width: 640px) 100vw, 33vw" style={{ objectFit: 'cover' }} unoptimized />
                     </div>
                   )}
                   <div style={{ padding: 'var(--space-6)' }}>
@@ -189,8 +190,8 @@ export default async function HomePage({ params }: Props) {
                   overflow: 'hidden',
                 }}>
                   {post.coverImage && (
-                    <div style={{ aspectRatio: '16/9', background: 'var(--color-border)' }}>
-                      <img src={post.coverImage} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <div style={{ position: 'relative', aspectRatio: '16/9', background: 'var(--color-border)' }}>
+                      <Image src={post.coverImage} alt={post.title} fill sizes="(max-width: 640px) 100vw, 33vw" style={{ objectFit: 'cover' }} unoptimized />
                     </div>
                   )}
                   <div style={{ padding: 'var(--space-6)' }}>

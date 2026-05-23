@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -69,7 +70,7 @@ export default async function HoroscopesPage({ params }: Props) {
             return (
               <Link key={sign.slug} href={`/${lang}/horoscopes/${sign.slug}`} className={styles.card}>
                 <div className={`${styles.cardTop} ${styles[element]}`}>
-                  <img className={styles.icon} src={sign.icon} alt="" aria-hidden="true" />
+                  <Image className={styles.icon} src={sign.icon} alt="" width={108} height={108} aria-hidden="true" />
                 </div>
                 <div className={styles.cardBody}>
                   <h2 className={styles.name}>{dict.zodiac[sign.slug as keyof typeof dict.zodiac]}</h2>

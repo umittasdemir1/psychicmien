@@ -1,5 +1,10 @@
+'use client';
+
+import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { SITE_NAME } from '@/lib/constants';
+import { locales, localeNames } from '@/i18n/config';
 import type { Locale } from '@/i18n/config';
 import styles from './Footer.module.css';
 
@@ -29,6 +34,12 @@ interface Props {
 export function Footer({ dict, lang }: Props) {
   const year = new Date().getFullYear();
   const { footer, nav } = dict;
+  const pathname = usePathname();
+
+  function localePath(targetLang: string) {
+    const withoutLocale = pathname.replace(/^\/(tr|en|es)/, '') || '/';
+    return `/${targetLang}${withoutLocale}`;
+  }
 
   return (
     <footer className={styles.footer}>
@@ -36,7 +47,7 @@ export function Footer({ dict, lang }: Props) {
         <div className={styles.grid}>
           <div className={styles.brand}>
             <Link href={`/${lang}`} className={styles.logo}>
-              <img src="/images/logo-dark.svg" alt="PsychicMien" width={160} height={40} />
+              <Image src="/images/logo-dark.svg" alt="PsychicMien" width={160} height={40} />
             </Link>
             <p>{footer.tagline}</p>
           </div>
@@ -70,6 +81,18 @@ export function Footer({ dict, lang }: Props) {
 
         <div className={styles.bottom}>
           <p>© {year} {SITE_NAME}. {footer.copyright}</p>
+          <div className={styles.langSwitcher}>
+            {locales.map((loc) => (
+              <Link
+                key={loc}
+                href={localePath(loc)}
+                className={`${styles.langBtn} ${loc === lang ? styles.langBtnActive : ''}`}
+                title={localeNames[loc]}
+              >
+                {loc.toUpperCase()}
+              </Link>
+            ))}
+          </div>
           <nav className={styles.legalLinks} aria-label="Legal links">
             <Link href={`/${lang}/privacy`}>{footer.privacy}</Link>
             <Link href={`/${lang}/terms`}>{footer.terms}</Link>

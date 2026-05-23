@@ -65,7 +65,9 @@
 
 .legalLinks {
   display: flex;
-  gap: var(--space-6);
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-6);
 }
 
 .legalLinks a {
@@ -83,7 +85,34 @@
   line-height: 1.5;
 }
 
+.langSwitcher {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.langBtn {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+  transition: color var(--transition), background var(--transition);
+}
+
+.langBtn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.langBtnActive {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
 @media (max-width: 768px) {
+  .footer { padding-block: var(--space-12); }
   .grid {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-8);
@@ -96,4 +125,9 @@
     gap: var(--space-4);
     text-align: center;
   }
+  .bottom p { max-width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: 1fr; }
 }

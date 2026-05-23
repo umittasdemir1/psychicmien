@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -66,7 +67,7 @@ export default async function BlogPage({ params }: Props) {
               <Link href={`/${lang}/blog/${featured.slug}`} className={styles.featured}>
                 {featured.coverImage && (
                   <div className={styles.featuredImage}>
-                    <img src={featured.coverImage} alt={featured.title} />
+                    <Image src={featured.coverImage} alt={featured.title} fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit: 'cover' }} unoptimized />
                   </div>
                 )}
                 <div className={styles.featuredBody}>
@@ -85,7 +86,7 @@ export default async function BlogPage({ params }: Props) {
                 <Link key={post.id} href={`/${lang}/blog/${post.slug}`} className={styles.card}>
                   {post.coverImage && (
                     <div className={styles.cardImage}>
-                      <img src={post.coverImage} alt={post.title} />
+                      <Image src={post.coverImage} alt={post.title} fill sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" style={{ objectFit: 'cover' }} unoptimized />
                     </div>
                   )}
                   <div className={styles.cardBody}>

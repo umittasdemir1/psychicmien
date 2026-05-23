@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -57,7 +58,7 @@ export default async function TarotCardPage({ params }: Props) {
           <div className={styles.imageCol}>
             <div className={styles.cardImage}>
               {card.imageUrl ? (
-                <img src={card.imageUrl} alt={card.name} />
+                <Image src={card.imageUrl} alt={card.name} width={280} height={420} style={{ width: '100%', height: 'auto' }} unoptimized />
               ) : (
                 <div className={styles.imagePlaceholder}>🔮</div>
               )}

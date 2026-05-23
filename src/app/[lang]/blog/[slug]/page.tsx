@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -85,7 +86,7 @@ export default async function BlogPostPage({ params }: Props) {
 
           {post.coverImage && (
             <div className={styles.cover}>
-              <img src={post.coverImage} alt={post.title} />
+              <Image src={post.coverImage} alt={post.title} fill sizes="(max-width: 900px) 100vw, 900px" style={{ objectFit: 'cover' }} unoptimized />
             </div>
           )}
 

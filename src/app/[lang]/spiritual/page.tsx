@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -195,7 +196,7 @@ export default async function SpiritualPage({ params }: Props) {
           <div className={styles.zodiacGrid}>
             {ZODIAC_SIGNS.map((sign) => (
               <Link key={sign.slug} href={`/${lang}/horoscopes/${sign.slug}`} className={styles.zodiacItem}>
-                <img className={styles.zodiacIcon} src={sign.icon} alt="" aria-hidden="true" />
+                <Image className={styles.zodiacIcon} src={sign.icon} alt="" width={56} height={56} aria-hidden="true" />
                 <span className={styles.zodiacName}>{dict.zodiac[sign.slug as keyof typeof dict.zodiac]}</span>
               </Link>
             ))}
