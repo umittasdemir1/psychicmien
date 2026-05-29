@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { createClient } from '@/data/supabase/client';
 import styles from './login.module.css';
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get('redirect') || '/admin';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -24,7 +26,7 @@ export default function LoginPage() {
         setError(`Giriş başarısız: ${authError.message}`);
         return;
       }
-      router.push('/admin');
+      router.push(redirectTo);
       router.refresh();
     } catch {
       setError('Bir hata oluştu. Lütfen tekrar deneyin.');

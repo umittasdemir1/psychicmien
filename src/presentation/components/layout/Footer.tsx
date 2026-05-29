@@ -63,7 +63,7 @@ export function Footer({ dict, lang }: Props) {
           </div>
 
           <div>
-            <p className={styles.colTitle}>{footer.pages}</p>
+            <p className={styles.colTitle}>{nav.shop}</p>
             <ul className={styles.links}>
               <li><Link href={`/${lang}/shop`}>{nav.shop}</Link></li>
             </ul>

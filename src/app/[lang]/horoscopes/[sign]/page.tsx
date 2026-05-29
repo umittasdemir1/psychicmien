@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/data/supabase/server';
 import { HoroscopeRepository } from '@/data/repositories/HoroscopeRepository';
 import { GetHoroscope } from '@/domain/usecases/GetHoroscope';
-import { ZODIAC_SIGNS } from '@/lib/constants';
+import { ZODIAC_SIGNS, SITE_NAME, SITE_URL } from '@/lib/constants';
 import { buildMetadata } from '@/lib/seo';
 import { locales } from '@/i18n/config';
 import type { Locale } from '@/i18n/config';
@@ -60,8 +60,26 @@ export default async function SignPage({ params }: Props) {
     usecase.execute(sign, 'monthly').catch(() => null),
   ]);
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: `${signName} ${dict.horoscopes.title}`,
+    description: `${signName} burcunun ${dict.horoscopes.subtitle}`,
+    image: `${SITE_URL}${signData.icon}`,
+    author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+    publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+    url: `${SITE_URL}/${lang}/horoscopes/${sign}`,
+    inLanguage: lang,
+    mainEntityOfPage: `${SITE_URL}/${lang}/horoscopes/${sign}`
+  };
+
   return (
-    <div className={styles.page}>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className={styles.page}>
       <div className="container">
         <header className={styles.header}>
           <div className={styles.symbolWrap}>
@@ -100,6 +118,7 @@ export default async function SignPage({ params }: Props) {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

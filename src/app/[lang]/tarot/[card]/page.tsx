@@ -6,6 +6,7 @@ import { createServerSupabaseClient } from '@/data/supabase/server';
 import { TarotRepository } from '@/data/repositories/TarotRepository';
 import { GetTarotCard } from '@/domain/usecases/GetTarotCards';
 import { buildMetadata } from '@/lib/seo';
+import { SITE_NAME, SITE_URL } from '@/lib/constants';
 import { locales } from '@/i18n/config';
 import type { Locale } from '@/i18n/config';
 import { getDictionary } from '@/i18n/getDictionary';
@@ -45,9 +46,27 @@ export default async function TarotCardPage({ params }: Props) {
     pentacles: dict.tarot.pentacles,
   };
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: `${card.name} Tarot Kartı Anlamı`,
+    description: card.uprightMeaning ?? card.description ?? undefined,
+    image: card.imageUrl ?? undefined,
+    author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+    publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+    url: `${SITE_URL}/${lang}/tarot/${card.slug}`,
+    inLanguage: lang,
+    mainEntityOfPage: `${SITE_URL}/${lang}/tarot/${card.slug}`
+  };
+
   return (
-    <div className={styles.page}>
-      <div className="container">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className={styles.page}>
+        <div className="container">
         <nav className={styles.breadcrumb} aria-label="Breadcrumb">
           <Link href={`/${lang}/tarot`}>{dict.tarot.title}</Link>
           <span>/</span>
@@ -124,5 +143,6 @@ export default async function TarotCardPage({ params }: Props) {
         </div>
       </div>
     </div>
+    </>
   );
 }
