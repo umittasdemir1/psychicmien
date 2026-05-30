@@ -66,6 +66,12 @@ export function Header({ dict, lang }: Props) {
     { href: `/${lang}/shop`, label: dict.nav.shop },
   ];
 
+  const mobileQuickLinks = [
+    { href: `/${lang}/horoscopes`, label: dict.nav.horoscopes },
+    { href: `/${lang}/tarot`, label: dict.nav.tarot },
+    { href: `/${lang}/shop`, label: dict.nav.shop },
+  ];
+
   return (
     <header className={`${styles.header} ${hidden ? styles.headerHidden : ''}`}>
       <div className={`container ${styles.inner}`}>
@@ -75,18 +81,6 @@ export function Header({ dict, lang }: Props) {
           </Link>
 
           <div className={styles.searchRow}>
-            <button
-              type="button"
-              className={styles.hamburger}
-              aria-label="Menu"
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen((v) => !v)}
-            >
-              <span />
-              <span />
-              <span />
-            </button>
-
             <form className={styles.searchForm} role="search" action={`/${lang}/search`}>
               <input
                 type="search"
@@ -115,23 +109,52 @@ export function Header({ dict, lang }: Props) {
             </Link>
           ))}
         </nav>
+      </div>
 
-        {menuOpen && (
-          <nav className={styles.mobileNav} aria-label="Mobil navigasyon">
-            {navLinks.map((link) => (
+      <div className={styles.mobileQuickNav}>
+        <div className={`container ${styles.mobileQuickInner}`}>
+          <button
+            type="button"
+            className={styles.hamburger}
+            aria-label="Menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+
+          <nav className={styles.mobileQuickLinks} aria-label="Hızlı erişim">
+            {mobileQuickLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={styles.mobileNavLink}
+                className={styles.mobileQuickLink}
                 aria-current={pathname === link.href ? 'page' : undefined}
-                onClick={() => setMenuOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
           </nav>
-        )}
+        </div>
       </div>
+
+      {menuOpen && (
+        <nav className={styles.mobileNav} aria-label="Mobil navigasyon">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={styles.mobileNavLink}
+              aria-current={pathname === link.href ? 'page' : undefined}
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+      )}
     </header>
   );
 }
